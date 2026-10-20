@@ -7,10 +7,10 @@ export const siteConfig = {
   role: "Software Engineering & IT Architecture",
   location: "Argentina",
   email: "contacto@octavioleiva.dev",
-  cvUrl: "/cv/Octavio-Leiva-CV.pdf",
+  cvUrl: "/cv-octavio-leiva.pdf",
   socials: {
     github: "https://github.com/octavioleiva",
-    linkedin: "https://www.linkedin.com/in/octavioleiva",
+    linkedin: "https://www.linkedin.com/in/octavio-leiva-048407288",
   },
 } as const;
 

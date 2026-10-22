@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowDown, ArrowRight, ArrowUpRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
 import { Reveal } from "@/components/ui/Reveal";
@@ -136,8 +137,18 @@ function Hero() {
         </Reveal>
 
         <div className="flex items-center justify-center overflow-hidden p-6 md:p-10 lg:col-span-7">
-          <div className="w-full h-[350px] md:h-[500px] flex items-center justify-center -ml-4">
-            <TechText accentColor="#dc2626" color="#ffffff" fontSize={140} sweep={true} text="OCTAVIO LEIVA" />
+          <div className="flex w-full flex-col items-center justify-center gap-8">
+            <div className="w-full h-[200px] md:h-[250px] flex items-center justify-center -ml-4">
+              <TechText accentColor="#dc2626" color="#ffffff" fontSize={140} sweep={true} text="OCTAVIO LEIVA" />
+            </div>
+            <Image
+              src="/foto.jpg"
+              alt={siteConfig.name}
+              width={256}
+              height={256}
+              priority
+              className="h-56 w-56 md:h-64 md:w-64 object-cover grayscale hover:grayscale-0 transition-all duration-300 border-4 border-white shadow-[8px_8px_0px_0px_rgba(220,38,38,1)]"
+            />
           </div>
         </div>
       </div>

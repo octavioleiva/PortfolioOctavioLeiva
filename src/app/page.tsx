@@ -1,6 +1,7 @@
 import { ArrowDown, ArrowRight, ArrowUpRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
 import { Reveal } from "@/components/ui/Reveal";
+import TechText from "@/components/TechText";
 import { projects } from "@/data/projects";
 import { navLinks, siteConfig, stack } from "@/data/site";
 
@@ -97,27 +98,8 @@ function Hero() {
         </p>
       </div>
 
-      {/* Título gigante */}
-      <Reveal className="px-4 py-10 md:px-6 md:py-14">
-        <h1 className="font-display uppercase leading-[0.82] tracking-tighter text-[clamp(2.75rem,12vw,13rem)]">
-          <span className="flex items-start justify-between gap-6">
-            Ingeniería
-            <span className="mt-3 hidden whitespace-nowrap text-right font-mono text-xs leading-relaxed tracking-widest text-red-600 lg:block">
-              {"/// estructura"}
-              <br />
-              {"/// lógica"}
-              <br />
-              {"/// escala"}
-            </span>
-          </span>
-          <span className="block text-right">
-            <span className="text-red-600">Y</span> Software
-          </span>
-        </h1>
-      </Reveal>
-
-      {/* Bloque inferior: texto + CTAs | slot de animación */}
-      <div className="grid border-t-2 border-white lg:grid-cols-12">
+      {/* Bloque: texto + CTAs | animación interactiva TechText */}
+      <div className="grid lg:grid-cols-12">
         <Reveal
           delay={0.1}
           className="flex flex-col justify-between gap-10 border-b-2 border-white p-6 md:p-10 lg:col-span-5 lg:border-b-0 lg:border-r-2"
@@ -153,29 +135,9 @@ function Hero() {
           </div>
         </Reveal>
 
-        <div className="p-6 md:p-10 lg:col-span-7">
-          <div className="relative h-full">
-            <span className="absolute -top-3 left-4 z-10 bg-red-600 px-2 py-0.5 text-xs font-bold uppercase tracking-widest text-black">
-              {"<ANIMACIÓN />"}
-            </span>
-            {/*
-              ── SLOT DE ANIMACIÓN ─────────────────────────────────────
-              Contenedor vacío con borde rojo sólido. Inyectá acá tu
-              componente de animación/background de React:
-
-                <div id="animation-slot" ...>
-                  <TuAnimacion />
-                </div>
-
-              Es `relative` y con overflow oculto: si tu animación usa
-              `absolute inset-0` o un <canvas> al 100%, lo llena entero.
-              ──────────────────────────────────────────────────────────
-            */}
-            <div
-              id="animation-slot"
-              data-slot="animation"
-              className="relative h-full min-h-[320px] overflow-hidden border-2 border-red-600 lg:min-h-[420px]"
-            />
+        <div className="flex items-center justify-center overflow-hidden p-6 md:p-10 lg:col-span-7">
+          <div className="w-full h-[350px] md:h-[500px] flex items-center justify-center -ml-4">
+            <TechText accentColor="#dc2626" color="#ffffff" fontSize={140} sweep={true} text="OCTAVIO LEIVA" />
           </div>
         </div>
       </div>

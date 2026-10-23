@@ -4,7 +4,7 @@ import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
 import { Reveal } from "@/components/ui/Reveal";
 import TechText from "@/components/TechText";
 import { projects } from "@/data/projects";
-import { navLinks, siteConfig, stack } from "@/data/site";
+import { navLinks, siteConfig } from "@/data/site";
 
 /* ==========================================================================
  *  NEO-BRUTALISMO / INDUSTRIAL
@@ -27,7 +27,6 @@ export default function Home() {
       <Navbar />
       <main className="flex-1 pt-14">
         <Hero />
-        <StackMarquee />
         <Projects />
         <About />
         <Contact />
@@ -157,29 +156,6 @@ function Hero() {
 }
 
 /* --------------------------------------------------------------------------
- *  CINTA DE STACK (marquee)
- * ------------------------------------------------------------------------ */
-function StackMarquee() {
-  const items = [...stack, ...stack];
-  return (
-    <div className="overflow-hidden border-b-2 border-white bg-red-600 py-3 text-black">
-      <ul className="flex w-max animate-marquee">
-        {items.map((tech, i) => (
-          <li
-            key={`${tech}-${i}`}
-            aria-hidden={i >= stack.length}
-            className="flex items-center gap-6 px-3 font-display text-xl uppercase md:text-2xl"
-          >
-            {tech}
-            <span aria-hidden>✶</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-/* --------------------------------------------------------------------------
  *  ENCABEZADO DE SECCIÓN
  * ------------------------------------------------------------------------ */
 function SectionHeader({ index, title, note }: { index: number; title: string; note: string }) {
@@ -206,60 +182,129 @@ function Projects() {
       <ul>
         {projects.map((project, i) => {
           const slug = project.title.toLowerCase().replace(/\s+/g, "-");
+          const isKWS = project.title.toUpperCase().includes("KWS");
+
           return (
             <Reveal
               as="li"
               key={project.title}
               className="group border-b-2 border-white transition-colors duration-150 hover:bg-red-600 hover:text-black"
             >
-              <article className="grid gap-6 px-4 py-8 md:grid-cols-12 md:items-start md:px-6 md:py-10">
-                <span className="text-sm font-bold text-red-600 group-hover:text-black md:col-span-1">
-                  /{pad(i + 1)}
-                </span>
+              {isKWS ? (
+                <article className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 px-4 py-8 md:px-6 md:py-10">
+                  {/* Lado izquierdo: Título, Stack y Descripción */}
+                  <div className="flex flex-col gap-4 max-w-2xl">
+                    <div className="flex items-baseline gap-4">
+                      <span className="text-sm font-bold text-red-600 group-hover:text-black">
+                        /{pad(i + 1)}
+                      </span>
+                      <h3 className="font-display text-3xl uppercase leading-none tracking-tight transition-transform duration-150 group-hover:translate-x-2 md:text-5xl">
+                        {project.title}
+                      </h3>
+                    </div>
+                    <p className="text-sm leading-relaxed">{project.description}</p>
+                    <ul className="flex flex-wrap gap-2" aria-label="Tecnologías">
+                      {project.tags.map((tag) => (
+                        <li
+                          key={tag}
+                          className="border-2 border-red-600 px-2 py-0.5 text-[11px] font-bold uppercase tracking-widest text-red-600 group-hover:border-black group-hover:text-black"
+                        >
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-                <h3 className="font-display text-3xl uppercase leading-none tracking-tight transition-transform duration-150 group-hover:translate-x-2 md:col-span-5 md:text-5xl">
-                  {project.title}
-                </h3>
-
-                <div className="md:col-span-4">
-                  <p className="text-sm leading-relaxed">{project.description}</p>
-                  <ul className="mt-5 flex flex-wrap gap-2" aria-label="Tecnologías">
-                    {project.tags.map((tag) => (
-                      <li
-                        key={tag}
-                        className="border-2 border-red-600 px-2 py-0.5 text-[11px] font-bold uppercase tracking-widest text-red-600 group-hover:border-black group-hover:text-black"
+                  {/* Lado derecho: Imagen kws-captura.png y enlaces */}
+                  <div className="flex flex-col items-start md:items-end gap-3 shrink-0">
+                    {project.demoUrl ? (
+                      <a
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block focus:outline-none"
+                        tabIndex={-1}
                       >
-                        {tag}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                        <Image
+                          src="/kws-captura.png"
+                          alt="Captura de WEB KWS"
+                          width={1024}
+                          height={487}
+                          className="w-48 object-cover border-2 border-white group-hover:border-black transition-colors duration-150"
+                        />
+                      </a>
+                    ) : (
+                      <Image
+                        src="/kws-captura.png"
+                        alt="Captura de WEB KWS"
+                        width={1024}
+                        height={487}
+                        className="w-48 object-cover border-2 border-white group-hover:border-black transition-colors duration-150"
+                      />
+                    )}
+                    {project.demoUrl && (
+                      <a
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        id={`project-${slug}-demo`}
+                        className="inline-flex items-center gap-1 text-sm font-bold uppercase tracking-widest border-b-2 border-current hover:bg-black hover:text-white"
+                      >
+                        Demo <ArrowUpRight size={16} strokeWidth={3} />
+                      </a>
+                    )}
+                  </div>
+                </article>
+              ) : (
+                <article className="grid gap-6 px-4 py-8 md:grid-cols-12 md:items-start md:px-6 md:py-10">
+                  <span className="text-sm font-bold text-red-600 group-hover:text-black md:col-span-1">
+                    /{pad(i + 1)}
+                  </span>
 
-                <div className="flex gap-6 text-sm font-bold uppercase tracking-widest md:col-span-2 md:flex-col md:items-end md:gap-3">
-                  {project.repoUrl && (
-                    <a
-                      href={project.repoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      id={`project-${slug}-code`}
-                      className="inline-flex items-center gap-1 border-b-2 border-current hover:bg-black hover:text-white"
-                    >
-                      Código <ArrowUpRight size={16} strokeWidth={3} />
-                    </a>
-                  )}
-                  {project.demoUrl && (
-                    <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      id={`project-${slug}-demo`}
-                      className="inline-flex items-center gap-1 border-b-2 border-current hover:bg-black hover:text-white"
-                    >
-                      Demo <ArrowUpRight size={16} strokeWidth={3} />
-                    </a>
-                  )}
-                </div>
-              </article>
+                  <h3 className="font-display text-3xl uppercase leading-none tracking-tight transition-transform duration-150 group-hover:translate-x-2 md:col-span-5 md:text-5xl">
+                    {project.title}
+                  </h3>
+
+                  <div className="md:col-span-4">
+                    <p className="text-sm leading-relaxed">{project.description}</p>
+                    <ul className="mt-5 flex flex-wrap gap-2" aria-label="Tecnologías">
+                      {project.tags.map((tag) => (
+                        <li
+                          key={tag}
+                          className="border-2 border-red-600 px-2 py-0.5 text-[11px] font-bold uppercase tracking-widest text-red-600 group-hover:border-black group-hover:text-black"
+                        >
+                          {tag}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="flex gap-6 text-sm font-bold uppercase tracking-widest md:col-span-2 md:flex-col md:items-end md:gap-3">
+                    {project.repoUrl && (
+                      <a
+                        href={project.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        id={`project-${slug}-code`}
+                        className="inline-flex items-center gap-1 border-b-2 border-current hover:bg-black hover:text-white"
+                      >
+                        Código <ArrowUpRight size={16} strokeWidth={3} />
+                      </a>
+                    )}
+                    {project.demoUrl && (
+                      <a
+                        href={project.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        id={`project-${slug}-demo`}
+                        className="inline-flex items-center gap-1 border-b-2 border-current hover:bg-black hover:text-white"
+                      >
+                        Demo <ArrowUpRight size={16} strokeWidth={3} />
+                      </a>
+                    )}
+                  </div>
+                </article>
+              )}
             </Reveal>
           );
         })}

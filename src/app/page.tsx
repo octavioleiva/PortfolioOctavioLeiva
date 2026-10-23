@@ -187,7 +187,6 @@ function Projects() {
       <ul>
         {projects.map((project, i) => {
           const slug = project.title.toLowerCase().replace(/\s+/g, "-");
-          const isKWS = project.title.toUpperCase().includes("KWS");
           const isOpen = openProject === i;
 
           return (
@@ -231,9 +230,13 @@ function Projects() {
               >
                 <div className="overflow-hidden">
                   <div className="border-b-4 border-l-4 border-r-4 border-white bg-black p-6 md:p-10">
-                    <div className={`grid gap-8 ${isKWS ? "lg:grid-cols-12 lg:items-start" : ""}`}>
+                    <div
+                      className={`flex flex-col ${
+                        project.image ? "lg:flex-row lg:items-start lg:justify-between" : ""
+                      } gap-8`}
+                    >
                       {/* Lado izquierdo: Descripción extendida, Aspectos técnicos, Stack y Botones */}
-                      <div className={`flex flex-col gap-6 ${isKWS ? "lg:col-span-7" : ""}`}>
+                      <div className={`flex flex-col gap-6 ${project.image ? "flex-1" : ""}`}>
                         <div>
                           <p className="mb-2 font-mono text-xs uppercase tracking-widest text-red-600">
                             &gt; Descripción extendida
@@ -304,27 +307,54 @@ function Projects() {
                         </div>
                       </div>
 
-                      {/* Lado derecho: Imagen kws-captura.png solo para WEB KWS */}
-                      {isKWS && (
-                        <div className="flex flex-col items-start lg:items-end justify-start lg:col-span-5">
-                          <div className="w-full max-w-md">
+                      {/* Lado derecho: Imagen de vista previa para proyectos que la incluyan */}
+                      {project.image && (
+                        <div className="flex flex-col items-start lg:items-end justify-start shrink-0">
+                          <div className="w-full sm:w-auto">
                             <p className="mb-2 font-mono text-xs uppercase tracking-widest text-red-600">
                               &gt; Vista previa del proyecto
                             </p>
-                            <a
-                              href={project.demoUrl || "#"}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="group/img block border-2 border-white shadow-[6px_6px_0px_0px_rgba(220,38,38,1)] transition-all duration-150 hover:border-red-600"
-                            >
-                              <Image
-                                src="/kws-captura.png"
-                                alt="Captura de WEB KWS"
-                                width={1024}
-                                height={487}
-                                className="w-full object-cover transition-transform duration-200 group-hover/img:scale-[1.02]"
-                              />
-                            </a>
+                            {project.demoUrl ? (
+                              <a
+                                href={project.demoUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group/img block border-2 border-white shadow-[6px_6px_0px_0px_rgba(220,38,38,1)] transition-all duration-150 hover:border-red-600"
+                              >
+                                <Image
+                                  src={project.image}
+                                  alt={`Captura de ${project.title}`}
+                                  width={1024}
+                                  height={500}
+                                  className="w-full sm:w-64 md:w-80 object-cover border-2 border-white transition-transform duration-200 group-hover/img:scale-[1.02]"
+                                />
+                              </a>
+                            ) : project.repoUrl ? (
+                              <a
+                                href={project.repoUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="group/img block border-2 border-white shadow-[6px_6px_0px_0px_rgba(220,38,38,1)] transition-all duration-150 hover:border-red-600"
+                              >
+                                <Image
+                                  src={project.image}
+                                  alt={`Captura de ${project.title}`}
+                                  width={1024}
+                                  height={500}
+                                  className="w-full sm:w-64 md:w-80 object-cover border-2 border-white transition-transform duration-200 group-hover/img:scale-[1.02]"
+                                />
+                              </a>
+                            ) : (
+                              <div className="border-2 border-white shadow-[6px_6px_0px_0px_rgba(220,38,38,1)]">
+                                <Image
+                                  src={project.image}
+                                  alt={`Captura de ${project.title}`}
+                                  width={1024}
+                                  height={500}
+                                  className="w-full sm:w-64 md:w-80 object-cover border-2 border-white"
+                                />
+                              </div>
+                            )}
                           </div>
                         </div>
                       )}

@@ -6,6 +6,7 @@ export interface Project {
   tags: string[];
   repoUrl?: string;
   demoUrl?: string;
+  image?: string;
 }
 
 export const projects: Project[] = [
@@ -24,6 +25,7 @@ export const projects: Project[] = [
     ],
     tags: [".NET", "Angular", "SQL Server"],
     repoUrl: "https://github.com/Equipo-de-desarrollo-LSD/App.git",
+    image: "/wayfinder-captura.png",
   },
   {
     title: "INTÉRPRETE PASCAL",
@@ -69,5 +71,6 @@ export const projects: Project[] = [
     ],
     tags: ["Frontend", "Web Development"],
     demoUrl: "https://keywaysolution.vercel.app/",
+    image: "/kws-captura.png",
   },
 ];

@@ -231,16 +231,35 @@ function Projects() {
               >
                 <div className="overflow-hidden">
                   <div className="border-b-4 border-l-4 border-r-4 border-white bg-black p-6 md:p-10">
-                    <div className={`grid gap-8 ${isKWS ? "lg:grid-cols-12 lg:items-center" : ""}`}>
-                      {/* Lado izquierdo: Descripción, Stack y Enlaces */}
+                    <div className={`grid gap-8 ${isKWS ? "lg:grid-cols-12 lg:items-start" : ""}`}>
+                      {/* Lado izquierdo: Descripción extendida, Aspectos técnicos, Stack y Botones */}
                       <div className={`flex flex-col gap-6 ${isKWS ? "lg:col-span-7" : ""}`}>
                         <div>
                           <p className="mb-2 font-mono text-xs uppercase tracking-widest text-red-600">
-                            &gt; Descripción del sistema
+                            &gt; Descripción extendida
                           </p>
-                          <p className="text-base leading-relaxed text-neutral-100 md:text-lg">
-                            {project.description}
+                          <p className="text-sm md:text-base leading-relaxed text-neutral-200">
+                            {project.extendedDescription}
                           </p>
+                        </div>
+
+                        <div>
+                          <p className="mb-3 font-mono text-xs uppercase tracking-widest text-red-600">
+                            &gt; Aspectos técnicos
+                          </p>
+                          <ul className="space-y-2.5 text-sm leading-relaxed" aria-label="Aspectos Técnicos">
+                            {project.technicalHighlights.map((item, idx) => (
+                              <li key={idx} className="flex items-start gap-3">
+                                <span
+                                  className="font-mono text-red-600 font-bold select-none text-base leading-none mt-1"
+                                  aria-hidden
+                                >
+                                  —
+                                </span>
+                                <span className="text-neutral-300">{item}</span>
+                              </li>
+                            ))}
+                          </ul>
                         </div>
 
                         <div>
@@ -266,9 +285,9 @@ function Projects() {
                               target="_blank"
                               rel="noopener noreferrer"
                               id={`project-${slug}-repo`}
-                              className={`inline-flex items-center justify-center gap-2 border-2 border-white bg-white px-5 py-3 text-xs md:text-sm font-bold uppercase tracking-widest text-black ${SHADOW_RED} ${PRESS}`}
+                              className="inline-flex items-center justify-center gap-2.5 border-2 border-white bg-red-600 px-6 py-3.5 text-xs md:text-sm font-bold uppercase tracking-widest text-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all duration-100 hover:translate-x-1 hover:translate-y-1 hover:shadow-none hover:bg-white hover:text-black hover:border-black active:translate-x-1.5 active:translate-y-1.5"
                             >
-                              <GithubIcon size={18} /> Ver Repositorio <ArrowUpRight size={16} strokeWidth={3} />
+                              <GithubIcon size={18} /> Repositorio <ArrowUpRight size={16} strokeWidth={3} />
                             </a>
                           )}
                           {project.demoUrl && (
@@ -277,7 +296,7 @@ function Projects() {
                               target="_blank"
                               rel="noopener noreferrer"
                               id={`project-${slug}-demo`}
-                              className={`inline-flex items-center justify-center gap-2 border-2 border-red-600 bg-red-600 px-5 py-3 text-xs md:text-sm font-bold uppercase tracking-widest text-black ${SHADOW_WHITE} ${PRESS}`}
+                              className="inline-flex items-center justify-center gap-2.5 border-2 border-white bg-black px-6 py-3.5 text-xs md:text-sm font-bold uppercase tracking-widest text-white shadow-[4px_4px_0px_0px_rgba(220,38,38,1)] transition-all duration-100 hover:translate-x-1 hover:translate-y-1 hover:shadow-none hover:bg-white hover:text-black hover:border-black active:translate-x-1.5 active:translate-y-1.5"
                             >
                               Ver Demo en vivo <ArrowUpRight size={16} strokeWidth={3} />
                             </a>
@@ -287,7 +306,7 @@ function Projects() {
 
                       {/* Lado derecho: Imagen kws-captura.png solo para WEB KWS */}
                       {isKWS && (
-                        <div className="flex flex-col items-start lg:items-end justify-center lg:col-span-5">
+                        <div className="flex flex-col items-start lg:items-end justify-start lg:col-span-5">
                           <div className="w-full max-w-md">
                             <p className="mb-2 font-mono text-xs uppercase tracking-widest text-red-600">
                               &gt; Vista previa del proyecto

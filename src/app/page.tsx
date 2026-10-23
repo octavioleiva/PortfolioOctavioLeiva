@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { ArrowDown, ArrowRight, ArrowUpRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
@@ -175,6 +178,8 @@ function SectionHeader({ index, title, note }: { index: number; title: string; n
  *  PROYECTOS — lista de filas completas
  * ------------------------------------------------------------------------ */
 function Projects() {
+  const [openProject, setOpenProject] = useState<number | null>(null);
+
   return (
     <section id="proyectos">
       <SectionHeader index={1} title="Proyectos" note={`${pad(projects.length)} entradas`} />
@@ -183,128 +188,131 @@ function Projects() {
         {projects.map((project, i) => {
           const slug = project.title.toLowerCase().replace(/\s+/g, "-");
           const isKWS = project.title.toUpperCase().includes("KWS");
+          const isOpen = openProject === i;
 
           return (
-            <Reveal
-              as="li"
-              key={project.title}
-              className="group border-b-2 border-white transition-colors duration-150 hover:bg-red-600 hover:text-black"
-            >
-              {isKWS ? (
-                <article className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 px-4 py-8 md:px-6 md:py-10">
-                  {/* Lado izquierdo: Título, Stack y Descripción */}
-                  <div className="flex flex-col gap-4 max-w-2xl">
-                    <div className="flex items-baseline gap-4">
-                      <span className="text-sm font-bold text-red-600 group-hover:text-black">
-                        /{pad(i + 1)}
-                      </span>
-                      <h3 className="font-display text-3xl uppercase leading-none tracking-tight transition-transform duration-150 group-hover:translate-x-2 md:text-5xl">
-                        {project.title}
-                      </h3>
-                    </div>
-                    <p className="text-sm leading-relaxed">{project.description}</p>
-                    <ul className="flex flex-wrap gap-2" aria-label="Tecnologías">
-                      {project.tags.map((tag) => (
-                        <li
-                          key={tag}
-                          className="border-2 border-red-600 px-2 py-0.5 text-[11px] font-bold uppercase tracking-widest text-red-600 group-hover:border-black group-hover:text-black"
-                        >
-                          {tag}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Lado derecho: Imagen kws-captura.png y enlaces */}
-                  <div className="flex flex-col items-start md:items-end gap-3 shrink-0">
-                    {project.demoUrl ? (
-                      <a
-                        href={project.demoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block focus:outline-none"
-                        tabIndex={-1}
-                      >
-                        <Image
-                          src="/kws-captura.png"
-                          alt="Captura de WEB KWS"
-                          width={1024}
-                          height={487}
-                          className="w-48 object-cover border-2 border-white group-hover:border-black transition-colors duration-150"
-                        />
-                      </a>
-                    ) : (
-                      <Image
-                        src="/kws-captura.png"
-                        alt="Captura de WEB KWS"
-                        width={1024}
-                        height={487}
-                        className="w-48 object-cover border-2 border-white group-hover:border-black transition-colors duration-150"
-                      />
-                    )}
-                    {project.demoUrl && (
-                      <a
-                        href={project.demoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        id={`project-${slug}-demo`}
-                        className="inline-flex items-center gap-1 text-sm font-bold uppercase tracking-widest border-b-2 border-current hover:bg-black hover:text-white"
-                      >
-                        Demo <ArrowUpRight size={16} strokeWidth={3} />
-                      </a>
-                    )}
-                  </div>
-                </article>
-              ) : (
-                <article className="grid gap-6 px-4 py-8 md:grid-cols-12 md:items-start md:px-6 md:py-10">
-                  <span className="text-sm font-bold text-red-600 group-hover:text-black md:col-span-1">
+            <Reveal as="li" key={project.title} className="group/item">
+              {/* Encabezado / Botón clickeable */}
+              <button
+                type="button"
+                onClick={() => setOpenProject(isOpen ? null : i)}
+                aria-expanded={isOpen}
+                className="group flex w-full items-center justify-between border-b-2 border-white px-4 py-8 text-left transition-colors duration-150 hover:bg-red-600 hover:text-black md:px-6 md:py-10 bg-black text-white cursor-pointer"
+              >
+                <div className="flex items-center gap-4 md:gap-8">
+                  <span className="text-sm font-bold text-red-600 group-hover:text-black">
                     /{pad(i + 1)}
                   </span>
-
-                  <h3 className="font-display text-3xl uppercase leading-none tracking-tight transition-transform duration-150 group-hover:translate-x-2 md:col-span-5 md:text-5xl">
+                  <h3 className="font-display text-3xl uppercase leading-none tracking-tight transition-transform duration-150 group-hover:translate-x-2 md:text-5xl">
                     {project.title}
                   </h3>
+                </div>
 
-                  <div className="md:col-span-4">
-                    <p className="text-sm leading-relaxed">{project.description}</p>
-                    <ul className="mt-5 flex flex-wrap gap-2" aria-label="Tecnologías">
-                      {project.tags.map((tag) => (
-                        <li
-                          key={tag}
-                          className="border-2 border-red-600 px-2 py-0.5 text-[11px] font-bold uppercase tracking-widest text-red-600 group-hover:border-black group-hover:text-black"
-                        >
-                          {tag}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                <div className="flex items-center gap-4">
+                  <span className="hidden font-mono text-xs font-bold uppercase tracking-widest sm:inline text-neutral-400 group-hover:text-black">
+                    {isOpen ? "[ CERRAR - ]" : "[ DETALLES + ]"}
+                  </span>
+                  <span
+                    aria-hidden
+                    className={`flex h-9 w-9 items-center justify-center border-2 border-white font-display text-xl transition-all duration-300 group-hover:border-black ${
+                      isOpen ? "rotate-45 bg-white text-black group-hover:bg-black group-hover:text-white" : ""
+                    }`}
+                  >
+                    +
+                  </span>
+                </div>
+              </button>
 
-                  <div className="flex gap-6 text-sm font-bold uppercase tracking-widest md:col-span-2 md:flex-col md:items-end md:gap-3">
-                    {project.repoUrl && (
-                      <a
-                        href={project.repoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        id={`project-${slug}-code`}
-                        className="inline-flex items-center gap-1 border-b-2 border-current hover:bg-black hover:text-white"
-                      >
-                        Código <ArrowUpRight size={16} strokeWidth={3} />
-                      </a>
-                    )}
-                    {project.demoUrl && (
-                      <a
-                        href={project.demoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        id={`project-${slug}-demo`}
-                        className="inline-flex items-center gap-1 border-b-2 border-current hover:bg-black hover:text-white"
-                      >
-                        Demo <ArrowUpRight size={16} strokeWidth={3} />
-                      </a>
-                    )}
+              {/* Panel expandido con animación suave */}
+              <div
+                className={`grid transition-all duration-300 ease-in-out overflow-hidden ${
+                  isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <div className="border-b-4 border-l-4 border-r-4 border-white bg-black p-6 md:p-10">
+                    <div className={`grid gap-8 ${isKWS ? "lg:grid-cols-12 lg:items-center" : ""}`}>
+                      {/* Lado izquierdo: Descripción, Stack y Enlaces */}
+                      <div className={`flex flex-col gap-6 ${isKWS ? "lg:col-span-7" : ""}`}>
+                        <div>
+                          <p className="mb-2 font-mono text-xs uppercase tracking-widest text-red-600">
+                            &gt; Descripción del sistema
+                          </p>
+                          <p className="text-base leading-relaxed text-neutral-100 md:text-lg">
+                            {project.description}
+                          </p>
+                        </div>
+
+                        <div>
+                          <p className="mb-3 font-mono text-xs uppercase tracking-widest text-red-600">
+                            &gt; Stack tecnológico
+                          </p>
+                          <ul className="flex flex-wrap gap-2" aria-label="Tecnologías">
+                            {project.tags.map((tag) => (
+                              <li
+                                key={tag}
+                                className="border-2 border-red-600 bg-black px-3 py-1 text-xs font-bold uppercase tracking-widest text-white shadow-[2px_2px_0px_0px_rgba(220,38,38,1)]"
+                              >
+                                {tag}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-4 pt-2">
+                          {project.repoUrl && (
+                            <a
+                              href={project.repoUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              id={`project-${slug}-repo`}
+                              className={`inline-flex items-center justify-center gap-2 border-2 border-white bg-white px-5 py-3 text-xs md:text-sm font-bold uppercase tracking-widest text-black ${SHADOW_RED} ${PRESS}`}
+                            >
+                              <GithubIcon size={18} /> Ver Repositorio <ArrowUpRight size={16} strokeWidth={3} />
+                            </a>
+                          )}
+                          {project.demoUrl && (
+                            <a
+                              href={project.demoUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              id={`project-${slug}-demo`}
+                              className={`inline-flex items-center justify-center gap-2 border-2 border-red-600 bg-red-600 px-5 py-3 text-xs md:text-sm font-bold uppercase tracking-widest text-black ${SHADOW_WHITE} ${PRESS}`}
+                            >
+                              Ver Demo en vivo <ArrowUpRight size={16} strokeWidth={3} />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Lado derecho: Imagen kws-captura.png solo para WEB KWS */}
+                      {isKWS && (
+                        <div className="flex flex-col items-start lg:items-end justify-center lg:col-span-5">
+                          <div className="w-full max-w-md">
+                            <p className="mb-2 font-mono text-xs uppercase tracking-widest text-red-600">
+                              &gt; Vista previa del proyecto
+                            </p>
+                            <a
+                              href={project.demoUrl || "#"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="group/img block border-2 border-white shadow-[6px_6px_0px_0px_rgba(220,38,38,1)] transition-all duration-150 hover:border-red-600"
+                            >
+                              <Image
+                                src="/kws-captura.png"
+                                alt="Captura de WEB KWS"
+                                width={1024}
+                                height={487}
+                                className="w-full object-cover transition-transform duration-200 group-hover/img:scale-[1.02]"
+                              />
+                            </a>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </article>
-              )}
+                </div>
+              </div>
             </Reveal>
           );
         })}
@@ -407,14 +415,14 @@ function Contact() {
   );
 }
 
-/* --------------------------------------------------------------------------
- *  FOOTER
- * ------------------------------------------------------------------------ */
+function CurrentYear() {
+  const [year, setYear] = useState<number>(2026);
 
-/** Next 16 + Cache Components: `new Date()` debe estar en un scope cacheado. */
-async function CurrentYear() {
-  "use cache";
-  return <>{new Date().getFullYear()}</>;
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
+  return <>{year}</>;
 }
 
 function Footer() {

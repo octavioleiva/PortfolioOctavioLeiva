@@ -187,6 +187,7 @@ function Projects() {
         {projects.map((project, i) => {
           const slug = project.title.toLowerCase().replace(/\s+/g, "-");
           const isOpen = openProject === i;
+          const hasImages = Boolean(project.image || (project.images && project.images.length > 0));
 
           return (
             <Reveal as="li" key={project.title} className="group/item">
@@ -231,11 +232,11 @@ function Projects() {
                   <div className="border-b-4 border-l-4 border-r-4 border-white bg-black p-6 md:p-10">
                     <div
                       className={`flex flex-col ${
-                        project.image ? "lg:flex-row lg:items-start lg:justify-between" : ""
+                        hasImages ? "lg:flex-row lg:items-start lg:justify-between" : ""
                       } gap-8`}
                     >
                       {/* Lado izquierdo: Descripción extendida, Aspectos técnicos, Stack y Botones */}
-                      <div className={`flex flex-col gap-6 ${project.image ? "flex-1" : ""}`}>
+                      <div className={`flex flex-col gap-6 ${hasImages ? "flex-1" : ""}`}>
                         <div>
                           <p className="mb-2 font-mono text-xs uppercase tracking-widest text-red-600">
                             &gt; Descripción extendida
@@ -258,7 +259,18 @@ function Projects() {
                                 >
                                   —
                                 </span>
-                                <span className="text-neutral-300">{item}</span>
+                                <span className="text-neutral-300">
+                                  {item.startsWith("Problema ") ? (
+                                    <>
+                                      <strong className="text-white font-bold">
+                                        {item.slice(0, item.indexOf("):") + 2)}
+                                      </strong>{" "}
+                                      {item.slice(item.indexOf("):") + 2).trim()}
+                                    </>
+                                  ) : (
+                                    item
+                                  )}
+                                </span>
                               </li>
                             ))}
                           </ul>
@@ -306,53 +318,75 @@ function Projects() {
                         </div>
                       </div>
 
-                      {/* Lado derecho: Imagen de vista previa para proyectos que la incluyan */}
-                      {project.image && (
+                      {/* Lado derecho: Imagen o galería de imágenes de vista previa */}
+                      {hasImages && (
                         <div className="flex flex-col items-start lg:items-end justify-start shrink-0">
                           <div className="w-full sm:w-auto">
                             <p className="mb-2 font-mono text-xs uppercase tracking-widest text-red-600">
                               &gt; Vista previa del proyecto
                             </p>
-                            {project.demoUrl ? (
-                              <a
-                                href={project.demoUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group/img block border-2 border-white shadow-[6px_6px_0px_0px_rgba(220,38,38,1)] transition-all duration-150 hover:border-red-600"
-                              >
-                                <Image
-                                  src={project.image}
-                                  alt={`Captura de ${project.title}`}
-                                  width={1024}
-                                  height={500}
-                                  className="w-full sm:w-64 md:w-80 object-cover border-2 border-white transition-transform duration-200 group-hover/img:scale-[1.02]"
-                                />
-                              </a>
-                            ) : project.repoUrl ? (
-                              <a
-                                href={project.repoUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="group/img block border-2 border-white shadow-[6px_6px_0px_0px_rgba(220,38,38,1)] transition-all duration-150 hover:border-red-600"
-                              >
-                                <Image
-                                  src={project.image}
-                                  alt={`Captura de ${project.title}`}
-                                  width={1024}
-                                  height={500}
-                                  className="w-full sm:w-64 md:w-80 object-cover border-2 border-white transition-transform duration-200 group-hover/img:scale-[1.02]"
-                                />
-                              </a>
-                            ) : (
-                              <div className="border-2 border-white shadow-[6px_6px_0px_0px_rgba(220,38,38,1)]">
-                                <Image
-                                  src={project.image}
-                                  alt={`Captura de ${project.title}`}
-                                  width={1024}
-                                  height={500}
-                                  className="w-full sm:w-64 md:w-80 object-cover border-2 border-white"
-                                />
+                            {project.images && project.images.length > 0 ? (
+                              <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-center">
+                                {project.images.map((imgSrc, imgIdx) => (
+                                  <a
+                                    key={imgIdx}
+                                    href={project.repoUrl || imgSrc}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group/img block border-2 border-white shadow-[6px_6px_0px_0px_rgba(220,38,38,1)] transition-all duration-150 hover:border-red-600"
+                                  >
+                                    <Image
+                                      src={imgSrc}
+                                      alt={`Simulación ${imgIdx + 1} de ${project.title}`}
+                                      width={600}
+                                      height={500}
+                                      className="w-48 md:w-64 object-cover border-2 border-white transition-transform duration-200 group-hover/img:scale-[1.02]"
+                                    />
+                                  </a>
+                                ))}
                               </div>
+                            ) : project.image && (
+                              project.demoUrl ? (
+                                <a
+                                  href={project.demoUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="group/img block border-2 border-white shadow-[6px_6px_0px_0px_rgba(220,38,38,1)] transition-all duration-150 hover:border-red-600"
+                                >
+                                  <Image
+                                    src={project.image}
+                                    alt={`Captura de ${project.title}`}
+                                    width={1024}
+                                    height={500}
+                                    className="w-full sm:w-64 md:w-80 object-cover border-2 border-white transition-transform duration-200 group-hover/img:scale-[1.02]"
+                                  />
+                                </a>
+                              ) : project.repoUrl ? (
+                                <a
+                                  href={project.repoUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="group/img block border-2 border-white shadow-[6px_6px_0px_0px_rgba(220,38,38,1)] transition-all duration-150 hover:border-red-600"
+                                >
+                                  <Image
+                                    src={project.image}
+                                    alt={`Captura de ${project.title}`}
+                                    width={1024}
+                                    height={500}
+                                    className="w-full sm:w-64 md:w-80 object-cover border-2 border-white transition-transform duration-200 group-hover/img:scale-[1.02]"
+                                  />
+                                </a>
+                              ) : (
+                                <div className="border-2 border-white shadow-[6px_6px_0px_0px_rgba(220,38,38,1)]">
+                                  <Image
+                                    src={project.image}
+                                    alt={`Captura de ${project.title}`}
+                                    width={1024}
+                                    height={500}
+                                    className="w-full sm:w-64 md:w-80 object-cover border-2 border-white"
+                                  />
+                                </div>
+                              )
                             )}
                           </div>
                         </div>

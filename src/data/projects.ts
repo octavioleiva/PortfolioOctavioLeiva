@@ -7,6 +7,7 @@ export interface Project {
   repoUrl?: string;
   demoUrl?: string;
   image?: string;
+  images?: string[];
 }
 
 export const projects: Project[] = [
@@ -72,5 +73,19 @@ export const projects: Project[] = [
     tags: ["Frontend", "Web Development"],
     demoUrl: "https://keywaysolution.vercel.app/",
     image: "/kws-captura.png",
+  },
+  {
+    title: "SIMULACIONES NUMÉRICAS",
+    description:
+      "Modelado matemático y resolución de Ecuaciones Diferenciales Parciales para simulación de sistemas lógicos y físicos.",
+    extendedDescription:
+      "Desarrollo algorítmico en GNU Octave para la resolución numérica de Ecuaciones Diferenciales Parciales (EDPs) con condiciones de borde de Dirichlet y Neumann.",
+    technicalHighlights: [
+      "Problema 1: Redes Neuronales Profundas (Diferencias Finitas): Modelado de la propagación y disipación de información utilizando la ecuación de difusión parabólica en 1D. Implementación de un esquema numérico explícito y análisis de condiciones de estabilidad temporal y espacial.",
+      "Problema 2: Propagación de Señales (Elementos Finitos - FEM): Simulación de interferencia de señal inalámbrica ante obstáculos físicos mediante la ecuación de Laplace elíptica en 2D. Desarrollo completo del mallado triangular, ensamblaje de la matriz de rigidez global y resolución del sistema.",
+    ],
+    tags: ["GNU Octave", "EDPs", "FEM", "Diferencias Finitas"],
+    repoUrl: "https://github.com/octavioleiva/Proyectos-Octave.git",
+    images: ["/octave-red.png", "/octave-fem.png"],
   },
 ];

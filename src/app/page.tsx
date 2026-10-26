@@ -383,7 +383,7 @@ const specs = [
   },
   {
     key: "Lenguajes & Stack",
-    value: "C# · .NET · ANGULAR · NEXT.JS · PASCAL · SQL SERVER",
+    value: "C# · .NET · ANGULAR · NEXT.JS · PASCAL · SMALLTALK · SQL SERVER",
   },
   {
     key: "Cloud & Servicios",

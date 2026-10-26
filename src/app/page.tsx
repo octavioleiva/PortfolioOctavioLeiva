@@ -115,7 +115,7 @@ function Hero() {
               Estudiante avanzado (4to año) de <strong className="bg-white px-1 text-black">Ingeniería en Sistemas de Información (UTN FRCU)</strong>. Mi perfil abarca el ciclo de vida completo de un proyecto tecnológico, no solo el código. Tengo experiencia práctica en análisis y diseño de sistemas, administración y formulación de planes de trabajo, simulación de sistemas y modelado.
             </p>
             <p className="mt-4 text-sm leading-relaxed text-neutral-300 md:text-base">
-              Busco roles dinámicos en <span className="border-b-2 border-red-600 font-bold text-white">Ingeniería de Software</span>, <span className="border-b-2 border-red-600 font-bold text-white">Arquitectura IT</span> o <span className="border-b-2 border-red-600 font-bold text-white">DevOps</span>, aportando una visión estructurada desde la infraestructura hasta el despliegue.
+              Tengo experiencia práctica construyendo ecosistemas <span className="border-b-2 border-red-600 font-bold text-white">Full-Stack</span>, realizando relevamiento exhaustivo de requisitos para el diseño y arquitectura de <span className="border-b-2 border-red-600 font-bold text-white">Bases de Datos</span>, y programando <span className="border-b-2 border-red-600 font-bold text-white">lógica de bajo nivel</span>. Además, aplico modelado matemático y simulación computacional mediante <strong className="bg-white px-1 text-black">GNU Octave</strong>, aportando una visión ingenieril orientada a la resolución de problemas complejos y la escalabilidad de la infraestructura.
             </p>
           </div>
 

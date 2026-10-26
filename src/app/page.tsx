@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { ArrowDown, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
 import { Reveal } from "@/components/ui/Reveal";
 import TechText from "@/components/TechText";
@@ -118,21 +118,13 @@ function Hero() {
             </p>
           </div>
 
-          <div className="flex flex-col gap-5 sm:flex-row">
+          <div className="flex">
             <a
               href="#proyectos"
               id="hero-cta-projects"
               className={`inline-flex items-center justify-center gap-3 border-2 border-red-600 bg-red-600 px-6 py-4 text-sm font-bold uppercase tracking-widest text-black ${SHADOW_WHITE} ${PRESS}`}
             >
               Ver proyectos <ArrowRight size={18} strokeWidth={3} />
-            </a>
-            <a
-              href="/cv-octavio-leiva.pdf"
-              id="hero-cta-cv"
-              download
-              className={`inline-flex items-center justify-center gap-3 border-2 border-white bg-black px-6 py-4 text-sm font-bold uppercase tracking-widest text-white ${SHADOW_RED} ${PRESS}`}
-            >
-              Descargar CV <ArrowDown size={18} strokeWidth={3} />
             </a>
           </div>
         </Reveal>

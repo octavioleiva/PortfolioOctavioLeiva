@@ -374,11 +374,34 @@ function Projects() {
  *  SOBRE MÍ — ficha técnica
  * ------------------------------------------------------------------------ */
 const specs = [
-  { key: "Formación", value: "Ing. en Sistemas de Información (UTN FRCU — 4to año)" },
-  { key: "Enfoque", value: "Software Engineering · IT Architecture · DevOps" },
-  { key: "Práctica", value: "Análisis & Diseño · Modelado · Simulación · Planes de trabajo" },
-  { key: "Stack", value: ".NET · SQL Server · Angular · Pascal · Docker" },
-  { key: "Ubicación", value: siteConfig.location },
+  {
+    key: "Formación",
+    value: "ING. EN SISTEMAS (UTN FRCU) · FUNDAMENTOS IA Y LLMs (ESC. INF. INT.)",
+  },
+  {
+    key: "Práctica",
+    value: "DISEÑO UML · APIs REST · POO · SIMULACIÓN (OCTAVE / VENSIM / SIMIO) · RPA",
+  },
+  {
+    key: "Lenguajes & Stack",
+    value: "C# · .NET · ANGULAR · NEXT.JS · PASCAL · SQL SERVER",
+  },
+  {
+    key: "Cloud & Servicios",
+    value: "AWS · VERCEL · SUPABASE · EMAILJS · RESEND",
+  },
+  {
+    key: "IA & Hardware",
+    value: "CLAUDE · ANTIGRAVITY · OLLAMA (LLMs) · ESP32 · ARDUINO IDE",
+  },
+  {
+    key: "Dev Tools",
+    value: "GIT · VS CODE · VISUAL STUDIO · POSTMAN · DBEAVER · SSMS",
+  },
+  {
+    key: "Ubicación",
+    value: "CONCEPCIÓN DEL URUGUAY, ARGENTINA",
+  },
 ];
 
 function About() {
@@ -389,11 +412,11 @@ function About() {
       <div className="grid lg:grid-cols-12">
         <Reveal className="border-b-2 border-white p-6 md:p-10 lg:col-span-5 lg:border-b-0 lg:border-r-2">
           <p className="text-lg leading-relaxed md:text-xl">
-            Ingeniería aplicada al software: concibo sistemas con visión de{" "}
-            <span className="text-red-600">arquitectura integral, método riguroso y ciclo completo</span>.
+            Ingeniería aplicada al software: concibo sistemas integrales, desde el modelado formal y bases de datos, hasta la{" "}
+            <span className="text-red-600">automatización de hardware y la integración de Inteligencia Artificial</span>.
           </p>
           <p className="mt-6 text-sm leading-relaxed text-white/70">
-            Formación sólida en la UTN FRCU conectando la formulación estratégica y el modelado formal con código robusto, infraestructura y despliegue continuo.
+            Combino la formación académica en la UTN FRCU con el desarrollo de ecosistemas modernos. Tengo experiencia práctica en arquitecturas Cloud, RPA, diseño de sistemas mediante UML, simulación computacional y el funcionamiento profundo de <span className="text-red-600">modelos LLMs y agentes autónomos</span>.
           </p>
         </Reveal>
 

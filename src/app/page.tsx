@@ -79,18 +79,17 @@ function Navbar() {
 function Hero() {
   const meta = [
     siteConfig.name,
-    siteConfig.role,
     siteConfig.location,
   ];
 
   return (
     <section id="inicio" className="border-b-2 border-white">
       {/* Barra de metadatos */}
-      <div className="grid grid-cols-2 border-b-2 border-white text-[11px] uppercase tracking-widest md:grid-cols-4 md:text-xs">
+      <div className="grid grid-cols-1 border-b-2 border-white text-[11px] uppercase tracking-widest sm:grid-cols-3 md:text-xs">
         {meta.map((item, i) => (
           <p
             key={item}
-            className={`border-white px-4 py-3 md:px-6 ${i % 2 === 0 ? "border-r-2" : "md:border-r-2"} ${i < 2 ? "border-b-2 md:border-b-0" : ""}`}
+            className="border-b-2 border-white px-4 py-3 sm:border-b-0 sm:border-r-2 md:px-6"
           >
             <span className="text-red-600">[{pad(i)}]</span> {item}
           </p>
@@ -454,14 +453,6 @@ function Contact() {
           Hablemos.
         </h2>
 
-        <a
-          href={`mailto:${siteConfig.email}`}
-          id="contact-email"
-          className="mt-10 inline-block break-all font-display text-[clamp(1.25rem,4.5vw,3.5rem)] uppercase leading-tight underline decoration-4 underline-offset-8 transition-colors duration-100 hover:bg-black hover:text-red-600"
-        >
-          {siteConfig.email}
-        </a>
-
         <div className="mt-12 flex flex-col gap-5 sm:flex-row">
           <a
             href={siteConfig.socials.linkedin}
@@ -506,8 +497,7 @@ function Footer() {
   return (
     <footer className="flex flex-col items-stretch justify-between text-xs uppercase tracking-widest sm:flex-row">
       <p className="border-b-2 border-white px-4 py-5 sm:border-b-0 md:px-6">
-        © <CurrentYear /> {siteConfig.name} <span className="text-red-600">{"//"}</span> Next.js +
-        Tailwind
+        © <CurrentYear /> {siteConfig.name}
       </p>
       <ul className="flex">
         {socials.map(({ label, href, Icon }) => (

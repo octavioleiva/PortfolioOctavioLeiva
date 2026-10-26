@@ -79,18 +79,17 @@ function Navbar() {
 function Hero() {
   const meta = [
     siteConfig.name,
-    siteConfig.role,
     siteConfig.location,
   ];
 
   return (
     <section id="inicio" className="border-b-2 border-white">
       {/* Barra de metadatos */}
-      <div className="grid grid-cols-2 border-b-2 border-white text-[11px] uppercase tracking-widest md:grid-cols-4 md:text-xs">
+      <div className="grid grid-cols-1 border-b-2 border-white text-[11px] uppercase tracking-widest sm:grid-cols-3 md:text-xs">
         {meta.map((item, i) => (
           <p
             key={item}
-            className={`border-white px-4 py-3 md:px-6 ${i % 2 === 0 ? "border-r-2" : "md:border-r-2"} ${i < 2 ? "border-b-2 md:border-b-0" : ""}`}
+            className="border-b-2 border-white px-4 py-3 sm:border-b-0 sm:border-r-2 md:px-6"
           >
             <span className="text-red-600">[{pad(i)}]</span> {item}
           </p>
@@ -115,7 +114,7 @@ function Hero() {
               Estudiante avanzado (4to año) de <strong className="bg-white px-1 text-black">Ingeniería en Sistemas de Información (UTN FRCU)</strong>. Mi perfil abarca el ciclo de vida completo de un proyecto tecnológico, no solo el código. Tengo experiencia práctica en análisis y diseño de sistemas, administración y formulación de planes de trabajo, simulación de sistemas y modelado.
             </p>
             <p className="mt-4 text-sm leading-relaxed text-neutral-300 md:text-base">
-              Busco roles dinámicos en <span className="border-b-2 border-red-600 font-bold text-white">Ingeniería de Software</span>, <span className="border-b-2 border-red-600 font-bold text-white">Arquitectura IT</span> o <span className="border-b-2 border-red-600 font-bold text-white">DevOps</span>, aportando una visión estructurada desde la infraestructura hasta el despliegue.
+              Tengo experiencia práctica construyendo ecosistemas <span className="border-b-2 border-red-600 font-bold text-white">Full-Stack</span>, realizando relevamiento exhaustivo de requisitos para el diseño y arquitectura de <span className="border-b-2 border-red-600 font-bold text-white">Bases de Datos</span>, y programando <span className="border-b-2 border-red-600 font-bold text-white">lógica de bajo nivel</span>. Además, aplico modelado matemático y simulación computacional mediante <strong className="bg-white px-1 text-black">GNU Octave</strong>, aportando una visión ingenieril orientada a la resolución de problemas complejos y la escalabilidad de la infraestructura.
             </p>
           </div>
 
@@ -374,11 +373,34 @@ function Projects() {
  *  SOBRE MÍ — ficha técnica
  * ------------------------------------------------------------------------ */
 const specs = [
-  { key: "Formación", value: "Ing. en Sistemas de Información (UTN FRCU — 4to año)" },
-  { key: "Enfoque", value: "Software Engineering · IT Architecture · DevOps" },
-  { key: "Práctica", value: "Análisis & Diseño · Modelado · Simulación · Planes de trabajo" },
-  { key: "Stack", value: ".NET · SQL Server · Angular · Pascal · Docker" },
-  { key: "Ubicación", value: siteConfig.location },
+  {
+    key: "Formación",
+    value: "ING. EN SISTEMAS (UTN FRCU) · FUNDAMENTOS IA Y LLMs (ESC. INF. INT.)",
+  },
+  {
+    key: "Práctica",
+    value: "DISEÑO UML · APIs REST · POO · SIMULACIÓN (OCTAVE / VENSIM / SIMIO) · RPA",
+  },
+  {
+    key: "Lenguajes & Stack",
+    value: "C# · .NET · ANGULAR · NEXT.JS · PASCAL · SMALLTALK · SQL SERVER",
+  },
+  {
+    key: "Cloud & Servicios",
+    value: "AWS · VERCEL · SUPABASE · EMAILJS · RESEND",
+  },
+  {
+    key: "IA & Hardware",
+    value: "CLAUDE · ANTIGRAVITY · OLLAMA (LLMs) · ESP32 · ARDUINO IDE",
+  },
+  {
+    key: "Dev Tools",
+    value: "GIT · VS CODE · VISUAL STUDIO · POSTMAN · DBEAVER · SSMS",
+  },
+  {
+    key: "Ubicación",
+    value: "CONCEPCIÓN DEL URUGUAY, ARGENTINA",
+  },
 ];
 
 function About() {
@@ -389,11 +411,11 @@ function About() {
       <div className="grid lg:grid-cols-12">
         <Reveal className="border-b-2 border-white p-6 md:p-10 lg:col-span-5 lg:border-b-0 lg:border-r-2">
           <p className="text-lg leading-relaxed md:text-xl">
-            Ingeniería aplicada al software: concibo sistemas con visión de{" "}
-            <span className="text-red-600">arquitectura integral, método riguroso y ciclo completo</span>.
+            Ingeniería aplicada al software: concibo sistemas integrales, desde el modelado formal y bases de datos, hasta la{" "}
+            <span className="text-red-600">automatización de hardware y la integración de Inteligencia Artificial</span>.
           </p>
           <p className="mt-6 text-sm leading-relaxed text-white/70">
-            Formación sólida en la UTN FRCU conectando la formulación estratégica y el modelado formal con código robusto, infraestructura y despliegue continuo.
+            Combino la formación académica en la UTN FRCU con el desarrollo de ecosistemas modernos. Tengo experiencia práctica en arquitecturas Cloud, RPA, diseño de sistemas mediante UML, simulación computacional y el funcionamiento profundo de <span className="text-red-600">modelos LLMs y agentes autónomos</span>.
           </p>
         </Reveal>
 
@@ -430,14 +452,6 @@ function Contact() {
         <h2 className="mt-4 font-display uppercase leading-[0.85] tracking-tighter text-[clamp(3rem,13vw,12rem)]">
           Hablemos.
         </h2>
-
-        <a
-          href={`mailto:${siteConfig.email}`}
-          id="contact-email"
-          className="mt-10 inline-block break-all font-display text-[clamp(1.25rem,4.5vw,3.5rem)] uppercase leading-tight underline decoration-4 underline-offset-8 transition-colors duration-100 hover:bg-black hover:text-red-600"
-        >
-          {siteConfig.email}
-        </a>
 
         <div className="mt-12 flex flex-col gap-5 sm:flex-row">
           <a
@@ -483,8 +497,7 @@ function Footer() {
   return (
     <footer className="flex flex-col items-stretch justify-between text-xs uppercase tracking-widest sm:flex-row">
       <p className="border-b-2 border-white px-4 py-5 sm:border-b-0 md:px-6">
-        © <CurrentYear /> {siteConfig.name} <span className="text-red-600">{"//"}</span> Next.js +
-        Tailwind
+        © <CurrentYear /> {siteConfig.name}
       </p>
       <ul className="flex">
         {socials.map(({ label, href, Icon }) => (

@@ -19,7 +19,15 @@ const translations = {
     viewProjects: "VER PROYECTOS",
     profileTitle: "> PERFIL.EXE",
     heroP1: "Estudiante avanzado (4to año) de Ingeniería en Sistemas de Información (UTN FRCU). Mi perfil abarca el ciclo de vida completo de un proyecto tecnológico, no solo el código. Tengo experiencia práctica en análisis y diseño de sistemas, administración y formulación de planes de trabajo, simulación de sistemas y modelado.",
-    heroP2: "Tengo experiencia práctica construyendo ecosistemas Full-Stack, realizando relevamiento exhaustivo de requisitos para el diseño y arquitectura de Bases de Datos, y programando lógica de bajo nivel. Además, aplico modelado matemático y simulación computacional mediante GNU Octave, aportando una visión ingenieril orientada a la resolución de problemas complejos y la escalabilidad de la infraestructura."
+    heroP2: "Tengo experiencia práctica construyendo ecosistemas Full-Stack, realizando relevamiento exhaustivo de requisitos para el diseño y arquitectura de Bases de Datos, y programando lógica de bajo nivel. Además, aplico modelado matemático y simulación computacional mediante GNU Octave, aportando una visión ingenieril orientada a la resolución de problemas complejos y la escalabilidad de la infraestructura.",
+    sectionProjectsTitle: "PROYECTOS",
+    sectionProjectsCount: "[01] 05 ENTRADAS",
+    btnDetails: "[ DETALLES + ]",
+    projWayfinder: { title: "WAYFINDER" },
+    projPascal: { title: "INTÉRPRETE PASCAL" },
+    projScoring: { title: "SISTEMA DE SCORING" },
+    projKws: { title: "WEB KWS" },
+    projOctave: { title: "SIMULACIONES NUMÉRICAS" }
   },
   en: {
     navProjects: "[01] PROJECTS",
@@ -30,7 +38,15 @@ const translations = {
     viewProjects: "VIEW PROJECTS",
     profileTitle: "> PROFILE.EXE",
     heroP1: "Advanced student (4th year) of Information Systems Engineering (UTN FRCU). My profile covers the entire lifecycle of a technological project, not just the code. I have practical experience in systems analysis and design, administration and formulation of work plans, systems simulation, and modeling.",
-    heroP2: "I have practical experience building Full-Stack ecosystems, performing exhaustive requirements gathering for Database design and architecture, and programming low-level logic. Additionally, I apply mathematical modeling and computational simulation using GNU Octave, providing an engineering vision focused on solving complex problems and infrastructure scalability."
+    heroP2: "I have practical experience building Full-Stack ecosystems, performing exhaustive requirements gathering for Database design and architecture, and programming low-level logic. Additionally, I apply mathematical modeling and computational simulation using GNU Octave, providing an engineering vision focused on solving complex problems and infrastructure scalability.",
+    sectionProjectsTitle: "PROJECTS",
+    sectionProjectsCount: "[01] 05 ENTRIES",
+    btnDetails: "[ DETAILS + ]",
+    projWayfinder: { title: "WAYFINDER" },
+    projPascal: { title: "PASCAL INTERPRETER" },
+    projScoring: { title: "SCORING SYSTEM" },
+    projKws: { title: "KWS WEBSITE" },
+    projOctave: { title: "NUMERICAL SIMULATIONS" }
   }
 };
 
@@ -57,7 +73,7 @@ export default function Home() {
       <Navbar lang={lang} setLang={setLang} />
       <main className="flex-1 pt-14">
         <Hero lang={lang} />
-        <Projects />
+        <Projects lang={lang} />
         <About />
         <Contact />
       </main>
@@ -208,7 +224,7 @@ function SectionHeader({ index, title, note }: { index: number; title: string; n
         {title}
       </h2>
       <p className="text-xs uppercase tracking-widest text-red-600">
-        [{pad(index)}] {note}
+        {note.startsWith("[") ? note : `[${pad(index)}] ${note}`}
       </p>
     </Reveal>
   );
@@ -217,12 +233,33 @@ function SectionHeader({ index, title, note }: { index: number; title: string; n
 /* --------------------------------------------------------------------------
  *  PROYECTOS — lista de filas completas
  * ------------------------------------------------------------------------ */
-function Projects() {
+function Projects({ lang }: { lang: 'es' | 'en' }) {
   const [openProject, setOpenProject] = useState<number | null>(null);
+
+  const getProjectTitle = (index: number) => {
+    switch (index) {
+      case 0:
+        return translations[lang].projWayfinder.title;
+      case 1:
+        return translations[lang].projPascal.title;
+      case 2:
+        return translations[lang].projScoring.title;
+      case 3:
+        return translations[lang].projKws.title;
+      case 4:
+        return translations[lang].projOctave.title;
+      default:
+        return projects[index].title;
+    }
+  };
 
   return (
     <section id="proyectos">
-      <SectionHeader index={1} title="Proyectos" note={`${pad(projects.length)} entradas`} />
+      <SectionHeader
+        index={1}
+        title={translations[lang].sectionProjectsTitle}
+        note={translations[lang].sectionProjectsCount}
+      />
 
       <ul>
         {projects.map((project, i) => {
@@ -244,13 +281,13 @@ function Projects() {
                     /{pad(i + 1)}
                   </span>
                   <h3 className="font-display text-3xl uppercase leading-none tracking-tight transition-transform duration-150 group-hover:translate-x-2 md:text-5xl">
-                    {project.title}
+                    {getProjectTitle(i)}
                   </h3>
                 </div>
 
                 <div className="flex items-center gap-4">
                   <span className="hidden font-mono text-xs font-bold uppercase tracking-widest sm:inline text-neutral-400 group-hover:text-black">
-                    {isOpen ? "[ CERRAR - ]" : "[ DETALLES + ]"}
+                    {isOpen ? (lang === "es" ? "[ CERRAR - ]" : "[ CLOSE - ]") : translations[lang].btnDetails}
                   </span>
                   <span
                     aria-hidden

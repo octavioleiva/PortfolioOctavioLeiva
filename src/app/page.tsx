@@ -39,7 +39,21 @@ const translations = {
       previewTitle: "> VISTA PREVIA DEL PROYECTO",
       repoBtn: "REPOSITORIO"
     },
-    projPascal: { title: "INTÉRPRETE PASCAL" },
+    projPascal: {
+      title: "INTÉRPRETE PASCAL",
+      extDescTitle: "> DESCRIPCIÓN EXTENDIDA",
+      extDescText: "Proyecto de bajo nivel fundamentado en la teoría de compiladores. Construido enteramente desde cero sin dependencias externas de procesamiento, demostrando un dominio profundo en estructuras de datos, recursividad y lógica computacional dura.",
+      techTitle: "> ASPECTOS TÉCNICOS",
+      techBullets: [
+        "Implementación de analizador léxico (Scanner) para tokenización y validación de caracteres.",
+        "Desarrollo de analizador sintáctico (Parser) mediante la construcción de Árboles de Sintaxis Abstracta (AST).",
+        "Análisis semántico y gestión robusta de tabla de símbolos.",
+        "Motor de evaluación de expresiones matemáticas y lógicas en tiempo de ejecución."
+      ],
+      stackTitle: "> STACK TECNOLÓGICO",
+      stackCompiler: "TEORÍA DE COMPILADORES",
+      repoBtn: "REPOSITORIO"
+    },
     projScoring: { title: "SISTEMA DE SCORING" },
     projKws: { title: "WEB KWS" },
     projOctave: { title: "SIMULACIONES NUMÉRICAS" }
@@ -73,7 +87,21 @@ const translations = {
       previewTitle: "> PROJECT PREVIEW",
       repoBtn: "REPOSITORY"
     },
-    projPascal: { title: "PASCAL INTERPRETER" },
+    projPascal: {
+      title: "PASCAL INTERPRETER",
+      extDescTitle: "> EXTENDED DESCRIPTION",
+      extDescText: "Low-level project based on compiler theory. Built entirely from scratch with no external processing dependencies, demonstrating deep mastery of data structures, recursion, and hard computational logic.",
+      techTitle: "> TECHNICAL ASPECTS",
+      techBullets: [
+        "Implementation of a lexical analyzer (Scanner) for character tokenization and validation.",
+        "Development of a syntax analyzer (Parser) through the construction of Abstract Syntax Trees (AST).",
+        "Semantic analysis and robust symbol table management.",
+        "Runtime evaluation engine for mathematical and logical expressions."
+      ],
+      stackTitle: "> TECH STACK",
+      stackCompiler: "COMPILER THEORY",
+      repoBtn: "REPOSITORY"
+    },
     projScoring: { title: "SCORING SYSTEM" },
     projKws: { title: "KWS WEBSITE" },
     projOctave: { title: "NUMERICAL SIMULATIONS" }
@@ -283,6 +311,28 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
     }
   };
 
+  const getProjectExtDesc = (index: number) => {
+    switch (index) {
+      case 0:
+        return translations[lang].projWayfinder.extDescText;
+      case 1:
+        return translations[lang].projPascal.extDescText;
+      default:
+        return projects[index].extendedDescription;
+    }
+  };
+
+  const getProjectBullets = (index: number) => {
+    switch (index) {
+      case 0:
+        return translations[lang].projWayfinder.techBullets;
+      case 1:
+        return translations[lang].projPascal.techBullets;
+      default:
+        return projects[index].technicalHighlights;
+    }
+  };
+
   return (
     <section id="proyectos">
       <SectionHeader
@@ -347,19 +397,19 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
                       <div className={`flex flex-col gap-6 ${hasImages ? "flex-1" : ""}`}>
                         <div>
                           <p className="mb-2 font-mono text-xs uppercase tracking-widest text-red-600">
-                            {translations[lang].projWayfinder.extDescTitle}
+                            {translations[lang].projPascal.extDescTitle}
                           </p>
                           <p className="text-sm md:text-base leading-relaxed text-neutral-200">
-                            {i === 0 ? translations[lang].projWayfinder.extDescText : project.extendedDescription}
+                            {getProjectExtDesc(i)}
                           </p>
                         </div>
 
                         <div>
                           <p className="mb-3 font-mono text-xs uppercase tracking-widest text-red-600">
-                            {translations[lang].projWayfinder.techTitle}
+                            {translations[lang].projPascal.techTitle}
                           </p>
                           <ul className="space-y-2.5 text-sm leading-relaxed" aria-label="Aspectos Técnicos">
-                            {(i === 0 ? translations[lang].projWayfinder.techBullets : project.technicalHighlights).map((item, idx) => (
+                            {getProjectBullets(i).map((item, idx) => (
                               <li key={idx} className="flex items-start gap-3">
                                 <span
                                   className="font-mono text-red-600 font-bold select-none text-base leading-none mt-1"
@@ -386,17 +436,23 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
 
                         <div>
                           <p className="mb-3 font-mono text-xs uppercase tracking-widest text-red-600">
-                            {translations[lang].projWayfinder.stackTitle}
+                            {translations[lang].projPascal.stackTitle}
                           </p>
                           <ul className="flex flex-wrap gap-2" aria-label="Tecnologías">
-                            {project.tags.map((tag) => (
-                              <li
-                                key={tag}
-                                className="border-2 border-red-600 bg-black px-3 py-1 text-xs font-bold uppercase tracking-widest text-white shadow-[2px_2px_0px_0px_rgba(220,38,38,1)]"
-                              >
-                                {tag}
-                              </li>
-                            ))}
+                            {project.tags.map((tag) => {
+                              const displayTag =
+                                i === 1 && (tag === "Teoría de Compiladores" || tag === "TEORÍA DE COMPILADORES")
+                                  ? translations[lang].projPascal.stackCompiler
+                                  : tag;
+                              return (
+                                <li
+                                  key={tag}
+                                  className="border-2 border-red-600 bg-black px-3 py-1 text-xs font-bold uppercase tracking-widest text-white shadow-[2px_2px_0px_0px_rgba(220,38,38,1)]"
+                                >
+                                  {displayTag}
+                                </li>
+                              );
+                            })}
                           </ul>
                         </div>
 
@@ -409,7 +465,7 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
                               id={`project-${slug}-repo`}
                               className="inline-flex items-center justify-center gap-2.5 border-2 border-white bg-red-600 px-6 py-3.5 text-xs md:text-sm font-bold uppercase tracking-widest text-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all duration-100 hover:translate-x-1 hover:translate-y-1 hover:shadow-none hover:bg-white hover:text-black hover:border-black active:translate-x-1.5 active:translate-y-1.5"
                             >
-                              <GithubIcon size={18} /> {translations[lang].projWayfinder.repoBtn} <ArrowUpRight size={16} strokeWidth={3} />
+                              <GithubIcon size={18} /> {translations[lang].projPascal.repoBtn} <ArrowUpRight size={16} strokeWidth={3} />
                             </a>
                           )}
                           {project.demoUrl && (

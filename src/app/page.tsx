@@ -22,6 +22,10 @@ const translations = {
     heroP2: "Tengo experiencia práctica construyendo ecosistemas Full-Stack, realizando relevamiento exhaustivo de requisitos para el diseño y arquitectura de Bases de Datos, y programando lógica de bajo nivel. Además, aplico modelado matemático y simulación computacional mediante GNU Octave, aportando una visión ingenieril orientada a la resolución de problemas complejos y la escalabilidad de la infraestructura.",
     sectionProjectsTitle: "PROYECTOS",
     sectionProjectsCount: "[01] 05 ENTRADAS",
+    sectionAboutTitle: "SOBRE MÍ",
+    techSheetTitle: "[02] FICHA TÉCNICA",
+    sectionContactTitle: "[03] CONTACTO",
+    letsTalk: "HABLEMOS.",
     btnDetails: "[ DETALLES + ]",
     projWayfinder: {
       title: "WAYFINDER",
@@ -110,6 +114,10 @@ const translations = {
     heroP2: "I have practical experience building Full-Stack ecosystems, performing exhaustive requirements gathering for Database design and architecture, and programming low-level logic. Additionally, I apply mathematical modeling and computational simulation using GNU Octave, providing an engineering vision focused on solving complex problems and infrastructure scalability.",
     sectionProjectsTitle: "PROJECTS",
     sectionProjectsCount: "[01] 05 ENTRIES",
+    sectionAboutTitle: "ABOUT ME",
+    techSheetTitle: "[02] TECH SHEET",
+    sectionContactTitle: "[03] CONTACT",
+    letsTalk: "LET'S TALK.",
     btnDetails: "[ DETAILS + ]",
     projWayfinder: {
       title: "WAYFINDER",
@@ -212,8 +220,8 @@ export default function Home() {
       <main className="flex-1 pt-14">
         <Hero lang={lang} />
         <Projects lang={lang} />
-        <About />
-        <Contact />
+        <About lang={lang} />
+        <Contact lang={lang} />
       </main>
       <Footer />
     </>
@@ -299,7 +307,7 @@ function Hero({ lang }: { lang: 'es' | 'en' }) {
         ))}
         <p className="flex items-center gap-2 px-4 py-3 md:px-6">
           <span className="inline-block h-2.5 w-2.5 animate-blink bg-red-600" aria-hidden />
-          Disponible
+          {translations[lang].available}
         </p>
       </div>
 
@@ -699,10 +707,14 @@ const specs = [
   },
 ];
 
-function About() {
+function About({ lang }: { lang: 'es' | 'en' }) {
   return (
     <section id="sobre-mi" className="border-b-2 border-white">
-      <SectionHeader index={2} title="Sobre mí" note="ficha técnica" />
+      <SectionHeader
+        index={2}
+        title={translations[lang].sectionAboutTitle}
+        note={translations[lang].techSheetTitle}
+      />
 
       <div className="grid lg:grid-cols-12">
         <Reveal className="border-b-2 border-white p-6 md:p-10 lg:col-span-5 lg:border-b-0 lg:border-r-2">
@@ -740,13 +752,13 @@ function About() {
 /* --------------------------------------------------------------------------
  *  CONTACTO — bloque rojo a sangre
  * ------------------------------------------------------------------------ */
-function Contact() {
+function Contact({ lang }: { lang: 'es' | 'en' }) {
   return (
     <section id="contacto" className="border-b-2 border-white bg-red-600 text-black">
       <Reveal className="px-4 py-16 md:px-6 md:py-24">
-        <p className="text-xs font-bold uppercase tracking-widest">[03] Contacto</p>
+        <p className="text-xs font-bold uppercase tracking-widest">{translations[lang].sectionContactTitle}</p>
         <h2 className="mt-4 font-display uppercase leading-[0.85] tracking-tighter text-[clamp(3rem,13vw,12rem)]">
-          Hablemos.
+          {translations[lang].letsTalk}
         </h2>
 
         <div className="mt-12 flex flex-col gap-5 sm:flex-row">

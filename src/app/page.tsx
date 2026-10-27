@@ -27,6 +27,28 @@ const translations = {
     sectionContactTitle: "[03] CONTACTO",
     letsTalk: "HABLEMOS.",
     btnDetails: "[ DETALLES + ]",
+    aboutP1_pre: "Ingeniería aplicada al software: concibo sistemas integrales, desde el modelado formal y bases de datos, hasta la ",
+    aboutP1_highlight: "automatización de hardware y la integración de Inteligencia Artificial",
+    aboutP1_post: ".",
+    aboutP2_pre: "Combino la formación académica en la UTN FRCU con el desarrollo de ecosistemas modernos. Tengo experiencia práctica en arquitecturas Cloud, RPA, diseño de sistemas mediante UML, simulación computacional y el funcionamiento profundo de ",
+    aboutP2_highlight: "modelos LLMs y agentes autónomos",
+    aboutP2_post: ".",
+    techSheet: {
+      formation: "Formación",
+      formationVal: "ING. EN SISTEMAS (UTN FRCU) · FUNDAMENTOS IA Y LLMs (ESC. INF. INT.)",
+      practice: "Práctica",
+      practiceVal: "DISEÑO UML · APIs REST · POO · SIMULACIÓN (OCTAVE / VENSIM / SIMIO) · RPA",
+      languages: "Lenguajes & Stack",
+      languagesVal: "C# · .NET · ANGULAR · NEXT.JS · PASCAL · SMALLTALK · SQL SERVER",
+      cloud: "Cloud & Servicios",
+      cloudVal: "AWS · VERCEL · SUPABASE · EMAILJS · RESEND",
+      ai: "IA & Hardware",
+      aiVal: "CLAUDE · ANTIGRAVITY · OLLAMA (LLMs) · ESP32 · ARDUINO IDE",
+      tools: "Dev Tools",
+      toolsVal: "GIT · VS CODE · VISUAL STUDIO · POSTMAN · DBEAVER · SSMS",
+      location: "Ubicación",
+      locationVal: "CONCEPCIÓN DEL URUGUAY, ARGENTINA"
+    },
     projWayfinder: {
       title: "WAYFINDER",
       extDescTitle: "> DESCRIPCIÓN EXTENDIDA",
@@ -119,6 +141,28 @@ const translations = {
     sectionContactTitle: "[03] CONTACT",
     letsTalk: "LET'S TALK.",
     btnDetails: "[ DETAILS + ]",
+    aboutP1_pre: "Software-applied engineering: I conceive end-to-end systems, from formal modeling and databases, to ",
+    aboutP1_highlight: "hardware automation and Artificial Intelligence integration",
+    aboutP1_post: ".",
+    aboutP2_pre: "I combine academic training at UTN FRCU with modern ecosystem development. I have practical experience in Cloud architectures, RPA, system design with UML, computational simulation, and the deep workings of ",
+    aboutP2_highlight: "LLM models and autonomous agents",
+    aboutP2_post: ".",
+    techSheet: {
+      formation: "Education",
+      formationVal: "INFORMATION SYSTEMS ENG. (UTN FRCU) · AI & LLM FOUNDATIONS (ESC. INF. INT.)",
+      practice: "Practice",
+      practiceVal: "UML DESIGN · REST APIs · OOP · SIMULATION (OCTAVE / VENSIM / SIMIO) · RPA",
+      languages: "Languages & Stack",
+      languagesVal: "C# · .NET · ANGULAR · NEXT.JS · PASCAL · SMALLTALK · SQL SERVER",
+      cloud: "Cloud & Services",
+      cloudVal: "AWS · VERCEL · SUPABASE · EMAILJS · RESEND",
+      ai: "AI & Hardware",
+      aiVal: "CLAUDE · ANTIGRAVITY · OLLAMA (LLMs) · ESP32 · ARDUINO IDE",
+      tools: "Dev Tools",
+      toolsVal: "GIT · VS CODE · VISUAL STUDIO · POSTMAN · DBEAVER · SSMS",
+      location: "Location",
+      locationVal: "CONCEPCIÓN DEL URUGUAY, ARGENTINA"
+    },
     projWayfinder: {
       title: "WAYFINDER",
       extDescTitle: "> EXTENDED DESCRIPTION",
@@ -676,37 +720,6 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
 /* --------------------------------------------------------------------------
  *  SOBRE MÍ — ficha técnica
  * ------------------------------------------------------------------------ */
-const specs = [
-  {
-    key: "Formación",
-    value: "ING. EN SISTEMAS (UTN FRCU) · FUNDAMENTOS IA Y LLMs (ESC. INF. INT.)",
-  },
-  {
-    key: "Práctica",
-    value: "DISEÑO UML · APIs REST · POO · SIMULACIÓN (OCTAVE / VENSIM / SIMIO) · RPA",
-  },
-  {
-    key: "Lenguajes & Stack",
-    value: "C# · .NET · ANGULAR · NEXT.JS · PASCAL · SMALLTALK · SQL SERVER",
-  },
-  {
-    key: "Cloud & Servicios",
-    value: "AWS · VERCEL · SUPABASE · EMAILJS · RESEND",
-  },
-  {
-    key: "IA & Hardware",
-    value: "CLAUDE · ANTIGRAVITY · OLLAMA (LLMs) · ESP32 · ARDUINO IDE",
-  },
-  {
-    key: "Dev Tools",
-    value: "GIT · VS CODE · VISUAL STUDIO · POSTMAN · DBEAVER · SSMS",
-  },
-  {
-    key: "Ubicación",
-    value: "CONCEPCIÓN DEL URUGUAY, ARGENTINA",
-  },
-];
-
 function About({ lang }: { lang: 'es' | 'en' }) {
   return (
     <section id="sobre-mi" className="border-b-2 border-white">
@@ -719,29 +732,87 @@ function About({ lang }: { lang: 'es' | 'en' }) {
       <div className="grid lg:grid-cols-12">
         <Reveal className="border-b-2 border-white p-6 md:p-10 lg:col-span-5 lg:border-b-0 lg:border-r-2">
           <p className="text-lg leading-relaxed md:text-xl">
-            Ingeniería aplicada al software: concibo sistemas integrales, desde el modelado formal y bases de datos, hasta la{" "}
-            <span className="text-red-600">automatización de hardware y la integración de Inteligencia Artificial</span>.
+            {translations[lang].aboutP1_pre ? (
+              <>
+                {translations[lang].aboutP1_pre}
+                <span className="text-red-600">{translations[lang].aboutP1_highlight}</span>
+                {translations[lang].aboutP1_post}
+              </>
+            ) : (
+              translations[lang].heroP1
+            )}
           </p>
           <p className="mt-6 text-sm leading-relaxed text-white/70">
-            Combino la formación académica en la UTN FRCU con el desarrollo de ecosistemas modernos. Tengo experiencia práctica en arquitecturas Cloud, RPA, diseño de sistemas mediante UML, simulación computacional y el funcionamiento profundo de <span className="text-red-600">modelos LLMs y agentes autónomos</span>.
+            {translations[lang].aboutP2_pre ? (
+              <>
+                {translations[lang].aboutP2_pre}
+                <span className="text-red-600">{translations[lang].aboutP2_highlight}</span>
+                {translations[lang].aboutP2_post}
+              </>
+            ) : (
+              translations[lang].heroP2
+            )}
           </p>
         </Reveal>
 
         <Reveal delay={0.1} className="lg:col-span-7">
           <dl>
-            {specs.map((spec, i) => (
-              <div
-                key={spec.key}
-                className={`grid grid-cols-3 gap-4 px-6 py-5 md:px-10 ${i < specs.length - 1 ? "border-b-2 border-white" : ""}`}
-              >
-                <dt className="text-xs font-bold uppercase tracking-widest text-red-600">
-                  {spec.key}
-                </dt>
-                <dd className="col-span-2 text-sm font-bold uppercase tracking-wide">
-                  {spec.value}
-                </dd>
-              </div>
-            ))}
+            <div className="grid grid-cols-3 gap-4 px-6 py-5 md:px-10 border-b-2 border-white">
+              <dt className="text-xs font-bold uppercase tracking-widest text-red-600">
+                {translations[lang].techSheet.formation}
+              </dt>
+              <dd className="col-span-2 text-sm font-bold uppercase tracking-wide">
+                {translations[lang].techSheet.formationVal}
+              </dd>
+            </div>
+            <div className="grid grid-cols-3 gap-4 px-6 py-5 md:px-10 border-b-2 border-white">
+              <dt className="text-xs font-bold uppercase tracking-widest text-red-600">
+                {translations[lang].techSheet.practice}
+              </dt>
+              <dd className="col-span-2 text-sm font-bold uppercase tracking-wide">
+                {translations[lang].techSheet.practiceVal}
+              </dd>
+            </div>
+            <div className="grid grid-cols-3 gap-4 px-6 py-5 md:px-10 border-b-2 border-white">
+              <dt className="text-xs font-bold uppercase tracking-widest text-red-600">
+                {translations[lang].techSheet.languages}
+              </dt>
+              <dd className="col-span-2 text-sm font-bold uppercase tracking-wide">
+                {translations[lang].techSheet.languagesVal}
+              </dd>
+            </div>
+            <div className="grid grid-cols-3 gap-4 px-6 py-5 md:px-10 border-b-2 border-white">
+              <dt className="text-xs font-bold uppercase tracking-widest text-red-600">
+                {translations[lang].techSheet.cloud}
+              </dt>
+              <dd className="col-span-2 text-sm font-bold uppercase tracking-wide">
+                {translations[lang].techSheet.cloudVal}
+              </dd>
+            </div>
+            <div className="grid grid-cols-3 gap-4 px-6 py-5 md:px-10 border-b-2 border-white">
+              <dt className="text-xs font-bold uppercase tracking-widest text-red-600">
+                {translations[lang].techSheet.ai}
+              </dt>
+              <dd className="col-span-2 text-sm font-bold uppercase tracking-wide">
+                {translations[lang].techSheet.aiVal}
+              </dd>
+            </div>
+            <div className="grid grid-cols-3 gap-4 px-6 py-5 md:px-10 border-b-2 border-white">
+              <dt className="text-xs font-bold uppercase tracking-widest text-red-600">
+                {translations[lang].techSheet.tools}
+              </dt>
+              <dd className="col-span-2 text-sm font-bold uppercase tracking-wide">
+                {translations[lang].techSheet.toolsVal}
+              </dd>
+            </div>
+            <div className="grid grid-cols-3 gap-4 px-6 py-5 md:px-10">
+              <dt className="text-xs font-bold uppercase tracking-widest text-red-600">
+                {translations[lang].techSheet.location}
+              </dt>
+              <dd className="col-span-2 text-sm font-bold uppercase tracking-wide">
+                {translations[lang].techSheet.locationVal}
+              </dd>
+            </div>
           </dl>
         </Reveal>
       </div>

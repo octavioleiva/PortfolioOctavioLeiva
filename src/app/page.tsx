@@ -69,7 +69,20 @@ const translations = {
       stackTitle: "> STACK TECNOLÓGICO",
       repoBtn: "REPOSITORIO"
     },
-    projKws: { title: "WEB KWS" },
+    projKws: {
+      title: "WEB KWS",
+      extDescTitle: "> DESCRIPCIÓN EXTENDIDA",
+      extDescText: "Plataforma web corporativa orientada a la presentación de servicios. Se priorizó el rendimiento de carga (performance), la semántica del código y una experiencia de usuario (UX) fluida en múltiples dispositivos.",
+      techTitle: "> ASPECTOS TÉCNICOS",
+      techBullets: [
+        "Estructuración frontend orientada a componentes.",
+        "Diseño 100% responsivo (enfoque Mobile-First).",
+        "Optimización de assets visuales y rendimiento de renderizado."
+      ],
+      stackTitle: "> STACK TECNOLÓGICO",
+      previewTitle: "> VISTA PREVIA DEL PROYECTO",
+      demoBtn: "VER DEMO EN VIVO"
+    },
     projOctave: { title: "SIMULACIONES NUMÉRICAS" }
   },
   en: {
@@ -131,7 +144,20 @@ const translations = {
       stackTitle: "> TECH STACK",
       repoBtn: "REPOSITORY"
     },
-    projKws: { title: "KWS WEBSITE" },
+    projKws: {
+      title: "WEB KWS",
+      extDescTitle: "> EXTENDED DESCRIPTION",
+      extDescText: "Corporate web platform oriented towards service presentation. Prioritized load performance, code semantics, and a fluid user experience (UX) across multiple devices.",
+      techTitle: "> TECHNICAL ASPECTS",
+      techBullets: [
+        "Component-oriented frontend structuring.",
+        "100% responsive design (Mobile-First approach).",
+        "Optimization of visual assets and rendering performance."
+      ],
+      stackTitle: "> TECH STACK",
+      previewTitle: "> PROJECT PREVIEW",
+      demoBtn: "VIEW LIVE DEMO"
+    },
     projOctave: { title: "NUMERICAL SIMULATIONS" }
   }
 };
@@ -347,6 +373,8 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
         return translations[lang].projPascal.extDescText;
       case 2:
         return translations[lang].projScoring.extDescText;
+      case 3:
+        return translations[lang].projKws.extDescText;
       default:
         return projects[index].extendedDescription;
     }
@@ -360,6 +388,8 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
         return translations[lang].projPascal.techBullets;
       case 2:
         return translations[lang].projScoring.techBullets;
+      case 3:
+        return translations[lang].projKws.techBullets;
       default:
         return projects[index].technicalHighlights;
     }
@@ -508,7 +538,7 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
                               id={`project-${slug}-demo`}
                               className="inline-flex items-center justify-center gap-2.5 border-2 border-white bg-black px-6 py-3.5 text-xs md:text-sm font-bold uppercase tracking-widest text-white shadow-[4px_4px_0px_0px_rgba(220,38,38,1)] transition-all duration-100 hover:translate-x-1 hover:translate-y-1 hover:shadow-none hover:bg-white hover:text-black hover:border-black active:translate-x-1.5 active:translate-y-1.5"
                             >
-                              Ver Demo en vivo <ArrowUpRight size={16} strokeWidth={3} />
+                              {translations[lang].projKws.demoBtn} <ArrowUpRight size={16} strokeWidth={3} />
                             </a>
                           )}
                         </div>
@@ -519,7 +549,7 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
                         <div className="flex flex-col items-start lg:items-end justify-start shrink-0">
                           <div className="w-full sm:w-auto">
                             <p className="mb-2 font-mono text-xs uppercase tracking-widest text-red-600">
-                              {translations[lang].projWayfinder.previewTitle}
+                              {translations[lang].projKws.previewTitle}
                             </p>
                             {project.images && project.images.length > 0 ? (
                               <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-center">

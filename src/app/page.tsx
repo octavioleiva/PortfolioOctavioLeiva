@@ -7,7 +7,26 @@ import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
 import { Reveal } from "@/components/ui/Reveal";
 import TechText from "@/components/TechText";
 import { projects } from "@/data/projects";
-import { navLinks, siteConfig } from "@/data/site";
+import { siteConfig } from "@/data/site";
+
+const translations = {
+  es: {
+    navProjects: "[01] PROYECTOS",
+    navAbout: "[02] SOBRE MÍ",
+    navContact: "[03] CONTACTO",
+    available: "DISPONIBLE",
+    location: "[02] ARGENTINA",
+    viewProjects: "VER PROYECTOS"
+  },
+  en: {
+    navProjects: "[01] PROJECTS",
+    navAbout: "[02] ABOUT ME",
+    navContact: "[03] CONTACT",
+    available: "AVAILABLE",
+    location: "[02] ARGENTINA",
+    viewProjects: "VIEW PROJECTS"
+  }
+};
 
 /* ==========================================================================
  *  NEO-BRUTALISMO / INDUSTRIAL
@@ -25,11 +44,13 @@ const PRESS =
   "transition-all duration-100 hover:translate-x-1.5 hover:translate-y-1.5 hover:shadow-none";
 
 export default function Home() {
+  const [lang, setLang] = useState<'es' | 'en'>('es');
+
   return (
     <>
-      <Navbar />
+      <Navbar lang={lang} setLang={setLang} />
       <main className="flex-1 pt-14">
-        <Hero />
+        <Hero lang={lang} />
         <Projects />
         <About />
         <Contact />
@@ -42,7 +63,19 @@ export default function Home() {
 /* --------------------------------------------------------------------------
  *  NAVBAR
  * ------------------------------------------------------------------------ */
-function Navbar() {
+function Navbar({
+  lang,
+  setLang,
+}: {
+  lang: 'es' | 'en';
+  setLang: (lang: 'es' | 'en') => void;
+}) {
+  const navItems = [
+    { href: "#proyectos", label: translations[lang].navProjects, id: "nav-proyectos" },
+    { href: "#sobre-mi", label: translations[lang].navAbout, id: "nav-sobre-mi" },
+    { href: "#contacto", label: translations[lang].navContact, id: "nav-contacto" },
+  ];
+
   return (
     <header className="fixed inset-x-0 top-0 z-50 h-14 border-b-2 border-white bg-black">
       <nav aria-label="Navegación principal" className="flex h-full items-stretch justify-between">
@@ -55,18 +88,28 @@ function Navbar() {
         </a>
 
         <ul className="flex items-stretch">
-          {navLinks.map((link, i) => (
-            <li key={link.href} className="flex border-l-2 border-white">
+          {navItems.map((item) => (
+            <li key={item.href} className="flex border-l-2 border-white">
               <a
-                href={link.href}
-                id={`nav-${link.href.slice(1)}`}
-                className="flex items-center gap-2 px-3 text-[11px] font-bold uppercase tracking-widest transition-colors duration-100 hover:bg-white hover:text-black sm:px-6 sm:text-sm"
+                href={item.href}
+                id={item.id}
+                className="flex items-center gap-2 px-3 text-[11px] font-bold uppercase tracking-widest whitespace-nowrap transition-colors duration-100 hover:bg-white hover:text-black sm:px-6 sm:text-sm"
               >
-                <span className="hidden text-red-600 sm:inline">{pad(i + 1)}</span>
-                {link.label}
+                {item.label}
               </a>
             </li>
           ))}
+          <li className="flex border-l-2 border-white">
+            <button
+              type="button"
+              onClick={() => setLang(lang === 'es' ? 'en' : 'es')}
+              id="nav-lang-toggle"
+              aria-label="Alternar idioma"
+              className="flex items-center justify-center bg-white px-3 font-mono text-xs font-black uppercase tracking-wider text-black transition-colors duration-100 hover:bg-red-600 hover:text-black sm:px-5 sm:text-sm cursor-pointer"
+            >
+              {lang === 'es' ? 'EN' : 'ES'}
+            </button>
+          </li>
         </ul>
       </nav>
     </header>
@@ -76,7 +119,7 @@ function Navbar() {
 /* --------------------------------------------------------------------------
  *  HERO — asimétrico
  * ------------------------------------------------------------------------ */
-function Hero() {
+function Hero({ lang }: { lang: 'es' | 'en' }) {
   const meta = [
     siteConfig.name,
     siteConfig.location,
@@ -124,7 +167,7 @@ function Hero() {
               id="hero-cta-projects"
               className={`inline-flex items-center justify-center gap-3 border-2 border-red-600 bg-red-600 px-6 py-4 text-sm font-bold uppercase tracking-widest text-black ${SHADOW_WHITE} ${PRESS}`}
             >
-              Ver proyectos <ArrowRight size={18} strokeWidth={3} />
+              {translations[lang].viewProjects} <ArrowRight size={18} strokeWidth={3} />
             </a>
           </div>
         </Reveal>

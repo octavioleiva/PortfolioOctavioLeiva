@@ -14,6 +14,7 @@ const translations = {
     navProjects: "[01] PROYECTOS",
     navAbout: "[02] SOBRE MÍ",
     navContact: "[03] CONTACTO",
+    langLabel: "[04] IDIOMA",
     available: "DISPONIBLE",
     location: "[02] ARGENTINA",
     viewProjects: "VER PROYECTOS",
@@ -128,6 +129,7 @@ const translations = {
     navProjects: "[01] PROJECTS",
     navAbout: "[02] ABOUT ME",
     navContact: "[03] CONTACT",
+    langLabel: "[04] LANGUAGE",
     available: "AVAILABLE",
     location: "[02] ARGENTINA",
     viewProjects: "VIEW PROJECTS",
@@ -311,16 +313,29 @@ function Navbar({
               </a>
             </li>
           ))}
-          <li className="flex border-l-2 border-white">
-            <button
-              type="button"
-              onClick={() => setLang(lang === 'es' ? 'en' : 'es')}
-              id="nav-lang-toggle"
-              aria-label="Alternar idioma"
-              className="flex items-center justify-center bg-white px-3 font-mono text-xs font-black uppercase tracking-wider text-black transition-colors duration-100 hover:bg-red-600 hover:text-black sm:px-5 sm:text-sm cursor-pointer"
-            >
-              {lang === 'es' ? 'EN' : 'ES'}
-            </button>
+          <li className="relative flex border-l-2 border-white">
+            <div className="group flex items-center gap-2 px-3 text-[11px] font-bold uppercase tracking-widest whitespace-nowrap transition-colors duration-100 hover:bg-white hover:text-black focus-within:bg-white focus-within:text-black sm:px-6 sm:text-sm">
+              <span>
+                {translations[lang].langLabel} ({lang.toUpperCase()})
+              </span>
+              <span className="text-[10px] text-red-600 group-hover:text-black group-focus-within:text-black">
+                ▼
+              </span>
+              <select
+                id="nav-lang-select"
+                aria-label="Selector de idioma"
+                value={lang}
+                onChange={(e) => setLang(e.target.value as 'es' | 'en')}
+                className="absolute inset-0 h-full w-full cursor-pointer appearance-none bg-transparent opacity-0"
+              >
+                <option value="es" className="bg-black text-white font-mono">
+                  ESPAÑOL
+                </option>
+                <option value="en" className="bg-black text-white font-mono">
+                  ENGLISH
+                </option>
+              </select>
+            </div>
           </li>
         </ul>
       </nav>

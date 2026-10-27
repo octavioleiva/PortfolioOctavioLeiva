@@ -54,7 +54,21 @@ const translations = {
       stackCompiler: "TEORÍA DE COMPILADORES",
       repoBtn: "REPOSITORIO"
     },
-    projScoring: { title: "SISTEMA DE SCORING" },
+    projScoring: {
+      title: "SISTEMA DE SCORING",
+      extDescTitle: "> DESCRIPCIÓN EXTENDIDA",
+      extDescText: "Sistema integral de cálculo de scoring para infracciones de tránsito. El desarrollo del ABMC (Alta, Baja, Modificación y Consulta) y la lógica de negocio fueron construidos 100% desde cero (backend y frontend), sin dependencias de frameworks externos.",
+      techTitle: "> ASPECTOS TÉCNICOS",
+      techBullets: [
+        "Gestión de memoria manual y dinámica mediante el uso intensivo de punteros.",
+        "Implementación de estructuras de datos complejas: árboles para búsquedas optimizadas y arreglos.",
+        "Persistencia de datos mediante lectura y escritura directa de archivos a bajo nivel.",
+        "Diseño y optimización de algoritmos personalizados y estructuras de control (bucles) para la evaluación de penalizaciones.",
+        "Entorno de desarrollo: Pascal / Lazarus."
+      ],
+      stackTitle: "> STACK TECNOLÓGICO",
+      repoBtn: "REPOSITORIO"
+    },
     projKws: { title: "WEB KWS" },
     projOctave: { title: "SIMULACIONES NUMÉRICAS" }
   },
@@ -102,7 +116,21 @@ const translations = {
       stackCompiler: "COMPILER THEORY",
       repoBtn: "REPOSITORY"
     },
-    projScoring: { title: "SCORING SYSTEM" },
+    projScoring: {
+      title: "SCORING SYSTEM",
+      extDescTitle: "> EXTENDED DESCRIPTION",
+      extDescText: "Comprehensive scoring calculation system for traffic violations. The CRUD (Create, Read, Update, Delete) operations and business logic were built 100% from scratch (backend and frontend), without external framework dependencies.",
+      techTitle: "> TECHNICAL ASPECTS",
+      techBullets: [
+        "Manual and dynamic memory management through intensive use of pointers.",
+        "Implementation of complex data structures: trees for optimized searches and arrays.",
+        "Data persistence through direct low-level file reading and writing.",
+        "Design and optimization of custom algorithms and control structures (loops) for penalty evaluation.",
+        "Development environment: Pascal / Lazarus."
+      ],
+      stackTitle: "> TECH STACK",
+      repoBtn: "REPOSITORY"
+    },
     projKws: { title: "KWS WEBSITE" },
     projOctave: { title: "NUMERICAL SIMULATIONS" }
   }
@@ -317,6 +345,8 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
         return translations[lang].projWayfinder.extDescText;
       case 1:
         return translations[lang].projPascal.extDescText;
+      case 2:
+        return translations[lang].projScoring.extDescText;
       default:
         return projects[index].extendedDescription;
     }
@@ -328,6 +358,8 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
         return translations[lang].projWayfinder.techBullets;
       case 1:
         return translations[lang].projPascal.techBullets;
+      case 2:
+        return translations[lang].projScoring.techBullets;
       default:
         return projects[index].technicalHighlights;
     }

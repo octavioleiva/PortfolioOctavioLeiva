@@ -16,7 +16,10 @@ const translations = {
     navContact: "[03] CONTACTO",
     available: "DISPONIBLE",
     location: "[02] ARGENTINA",
-    viewProjects: "VER PROYECTOS"
+    viewProjects: "VER PROYECTOS",
+    profileTitle: "> PERFIL.EXE",
+    heroP1: "Estudiante avanzado (4to año) de Ingeniería en Sistemas de Información (UTN FRCU). Mi perfil abarca el ciclo de vida completo de un proyecto tecnológico, no solo el código. Tengo experiencia práctica en análisis y diseño de sistemas, administración y formulación de planes de trabajo, simulación de sistemas y modelado.",
+    heroP2: "Tengo experiencia práctica construyendo ecosistemas Full-Stack, realizando relevamiento exhaustivo de requisitos para el diseño y arquitectura de Bases de Datos, y programando lógica de bajo nivel. Además, aplico modelado matemático y simulación computacional mediante GNU Octave, aportando una visión ingenieril orientada a la resolución de problemas complejos y la escalabilidad de la infraestructura."
   },
   en: {
     navProjects: "[01] PROJECTS",
@@ -24,7 +27,10 @@ const translations = {
     navContact: "[03] CONTACT",
     available: "AVAILABLE",
     location: "[02] ARGENTINA",
-    viewProjects: "VIEW PROJECTS"
+    viewProjects: "VIEW PROJECTS",
+    profileTitle: "> PROFILE.EXE",
+    heroP1: "Advanced student (4th year) of Information Systems Engineering (UTN FRCU). My profile covers the entire lifecycle of a technological project, not just the code. I have practical experience in systems analysis and design, administration and formulation of work plans, systems simulation, and modeling.",
+    heroP2: "I have practical experience building Full-Stack ecosystems, performing exhaustive requirements gathering for Database design and architecture, and programming low-level logic. Additionally, I apply mathematical modeling and computational simulation using GNU Octave, providing an engineering vision focused on solving complex problems and infrastructure scalability."
   }
 };
 
@@ -151,13 +157,13 @@ function Hero({ lang }: { lang: 'es' | 'en' }) {
         >
           <div>
             <p className="mb-4 text-xs uppercase tracking-widest text-red-600">
-              &gt; perfil.exe
+              {translations[lang].profileTitle}
             </p>
             <p className="text-base leading-relaxed text-neutral-100 md:text-lg">
-              Estudiante avanzado (4to año) de <strong className="bg-white px-1 text-black">Ingeniería en Sistemas de Información (UTN FRCU)</strong>. Mi perfil abarca el ciclo de vida completo de un proyecto tecnológico, no solo el código. Tengo experiencia práctica en análisis y diseño de sistemas, administración y formulación de planes de trabajo, simulación de sistemas y modelado.
+              {translations[lang].heroP1}
             </p>
             <p className="mt-4 text-sm leading-relaxed text-neutral-300 md:text-base">
-              Tengo experiencia práctica construyendo ecosistemas <span className="border-b-2 border-red-600 font-bold text-white">Full-Stack</span>, realizando relevamiento exhaustivo de requisitos para el diseño y arquitectura de <span className="border-b-2 border-red-600 font-bold text-white">Bases de Datos</span>, y programando <span className="border-b-2 border-red-600 font-bold text-white">lógica de bajo nivel</span>. Además, aplico modelado matemático y simulación computacional mediante <strong className="bg-white px-1 text-black">GNU Octave</strong>, aportando una visión ingenieril orientada a la resolución de problemas complejos y la escalabilidad de la infraestructura.
+              {translations[lang].heroP2}
             </p>
           </div>
 

@@ -83,7 +83,20 @@ const translations = {
       previewTitle: "> VISTA PREVIA DEL PROYECTO",
       demoBtn: "VER DEMO EN VIVO"
     },
-    projOctave: { title: "SIMULACIONES NUMÉRICAS" }
+    projOctave: {
+      title: "SIMULACIONES NUMÉRICAS",
+      extDescTitle: "> DESCRIPCIÓN EXTENDIDA",
+      extDescText: "Desarrollo algorítmico en GNU Octave para la resolución numérica de Ecuaciones Diferenciales Parciales (EDPs) con condiciones de borde de Dirichlet y Neumann.",
+      techTitle: "> ASPECTOS TÉCNICOS",
+      techBullets: [
+        "Problema 1: Redes Neuronales Profundas (Diferencias Finitas): Modelado de la propagación y disipación de información utilizando la ecuación de difusión parabólica en 1D. Implementación de un esquema numérico explícito y análisis de condiciones de estabilidad temporal y espacial.",
+        "Problema 2: Propagación de Señales (Elementos Finitos - FEM): Simulación de interferencia de señal inalámbrica ante obstáculos físicos mediante la ecuación de Laplace elíptica en 2D. Desarrollo completo del mallado triangular, ensamblaje de la matriz de rigidez global y resolución del sistema."
+      ],
+      stackTitle: "> STACK TECNOLÓGICO",
+      stackTags: ["GNU OCTAVE", "EDPS", "FEM", "DIFERENCIAS FINITAS"],
+      previewTitle: "> VISTA PREVIA DEL PROYECTO",
+      repoBtn: "REPOSITORIO"
+    }
   },
   en: {
     navProjects: "[01] PROJECTS",
@@ -158,7 +171,20 @@ const translations = {
       previewTitle: "> PROJECT PREVIEW",
       demoBtn: "VIEW LIVE DEMO"
     },
-    projOctave: { title: "NUMERICAL SIMULATIONS" }
+    projOctave: {
+      title: "NUMERICAL SIMULATIONS",
+      extDescTitle: "> EXTENDED DESCRIPTION",
+      extDescText: "Algorithmic development in GNU Octave for the numerical resolution of Partial Differential Equations (PDEs) with Dirichlet and Neumann boundary conditions.",
+      techTitle: "> TECHNICAL ASPECTS",
+      techBullets: [
+        "Problem 1: Deep Neural Networks (Finite Differences): Modeling of information propagation and dissipation using the 1D parabolic diffusion equation. Implementation of an explicit numerical scheme and analysis of temporal and spatial stability conditions.",
+        "Problem 2: Signal Propagation (Finite Elements - FEM): Simulation of wireless signal interference against physical obstacles using the 2D elliptic Laplace equation. Complete development of the triangular mesh, global stiffness matrix assembly, and system resolution."
+      ],
+      stackTitle: "> TECH STACK",
+      stackTags: ["GNU OCTAVE", "PDES", "FEM", "FINITE DIFFERENCES"],
+      previewTitle: "> PROJECT PREVIEW",
+      repoBtn: "REPOSITORY"
+    }
   }
 };
 
@@ -375,6 +401,8 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
         return translations[lang].projScoring.extDescText;
       case 3:
         return translations[lang].projKws.extDescText;
+      case 4:
+        return translations[lang].projOctave.extDescText;
       default:
         return projects[index].extendedDescription;
     }
@@ -390,9 +418,23 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
         return translations[lang].projScoring.techBullets;
       case 3:
         return translations[lang].projKws.techBullets;
+      case 4:
+        return translations[lang].projOctave.techBullets;
       default:
         return projects[index].technicalHighlights;
     }
+  };
+
+  const getProjectTags = (index: number) => {
+    if (index === 4) {
+      return translations[lang].projOctave.stackTags;
+    }
+    return projects[index].tags.map((tag) => {
+      if (index === 1 && (tag === "Teoría de Compiladores" || tag === "TEORÍA DE COMPILADORES")) {
+        return translations[lang].projPascal.stackCompiler;
+      }
+      return tag;
+    });
   };
 
   return (
@@ -459,7 +501,7 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
                       <div className={`flex flex-col gap-6 ${hasImages ? "flex-1" : ""}`}>
                         <div>
                           <p className="mb-2 font-mono text-xs uppercase tracking-widest text-red-600">
-                            {translations[lang].projPascal.extDescTitle}
+                            {translations[lang].projOctave.extDescTitle}
                           </p>
                           <p className="text-sm md:text-base leading-relaxed text-neutral-200">
                             {getProjectExtDesc(i)}
@@ -468,7 +510,7 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
 
                         <div>
                           <p className="mb-3 font-mono text-xs uppercase tracking-widest text-red-600">
-                            {translations[lang].projPascal.techTitle}
+                            {translations[lang].projOctave.techTitle}
                           </p>
                           <ul className="space-y-2.5 text-sm leading-relaxed" aria-label="Aspectos Técnicos">
                             {getProjectBullets(i).map((item, idx) => (
@@ -480,7 +522,7 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
                                   —
                                 </span>
                                 <span className="text-neutral-300">
-                                  {item.startsWith("Problema ") ? (
+                                  {item.includes("):") ? (
                                     <>
                                       <strong className="text-white font-bold">
                                         {item.slice(0, item.indexOf("):") + 2)}
@@ -498,23 +540,17 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
 
                         <div>
                           <p className="mb-3 font-mono text-xs uppercase tracking-widest text-red-600">
-                            {translations[lang].projPascal.stackTitle}
+                            {translations[lang].projOctave.stackTitle}
                           </p>
                           <ul className="flex flex-wrap gap-2" aria-label="Tecnologías">
-                            {project.tags.map((tag) => {
-                              const displayTag =
-                                i === 1 && (tag === "Teoría de Compiladores" || tag === "TEORÍA DE COMPILADORES")
-                                  ? translations[lang].projPascal.stackCompiler
-                                  : tag;
-                              return (
-                                <li
-                                  key={tag}
-                                  className="border-2 border-red-600 bg-black px-3 py-1 text-xs font-bold uppercase tracking-widest text-white shadow-[2px_2px_0px_0px_rgba(220,38,38,1)]"
-                                >
-                                  {displayTag}
-                                </li>
-                              );
-                            })}
+                            {getProjectTags(i).map((tag) => (
+                              <li
+                                key={tag}
+                                className="border-2 border-red-600 bg-black px-3 py-1 text-xs font-bold uppercase tracking-widest text-white shadow-[2px_2px_0px_0px_rgba(220,38,38,1)]"
+                              >
+                                {tag}
+                              </li>
+                            ))}
                           </ul>
                         </div>
 
@@ -527,7 +563,7 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
                               id={`project-${slug}-repo`}
                               className="inline-flex items-center justify-center gap-2.5 border-2 border-white bg-red-600 px-6 py-3.5 text-xs md:text-sm font-bold uppercase tracking-widest text-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all duration-100 hover:translate-x-1 hover:translate-y-1 hover:shadow-none hover:bg-white hover:text-black hover:border-black active:translate-x-1.5 active:translate-y-1.5"
                             >
-                              <GithubIcon size={18} /> {translations[lang].projPascal.repoBtn} <ArrowUpRight size={16} strokeWidth={3} />
+                              <GithubIcon size={18} /> {translations[lang].projOctave.repoBtn} <ArrowUpRight size={16} strokeWidth={3} />
                             </a>
                           )}
                           {project.demoUrl && (

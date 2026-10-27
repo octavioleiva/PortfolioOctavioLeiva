@@ -23,7 +23,22 @@ const translations = {
     sectionProjectsTitle: "PROYECTOS",
     sectionProjectsCount: "[01] 05 ENTRADAS",
     btnDetails: "[ DETALLES + ]",
-    projWayfinder: { title: "WAYFINDER" },
+    projWayfinder: {
+      title: "WAYFINDER",
+      extDescTitle: "> DESCRIPCIÓN EXTENDIDA",
+      extDescText: "Plataforma integral de turismo e interacción. El sistema permite a los usuarios autenticados explorar destinos geolocalizados, interactuar mediante calificaciones y reseñas, y gestionar alertas personalizadas sobre eventos guardados.",
+      techTitle: "> ASPECTOS TÉCNICOS",
+      techBullets: [
+        "Implementación de sistema de autenticación, autorización y gestión de sesiones de usuario.",
+        "Desarrollo de módulos de interacción social (CRUD de comentarios y sistema de rating).",
+        "Arquitectura de notificaciones y seguimiento de eventos favoritos.",
+        "Backend en .NET con base de datos relacional en SQL Server.",
+        "Frontend SPA desarrollado en Angular con integración de APIs externas (GeoDB)."
+      ],
+      stackTitle: "> STACK TECNOLÓGICO",
+      previewTitle: "> VISTA PREVIA DEL PROYECTO",
+      repoBtn: "REPOSITORIO"
+    },
     projPascal: { title: "INTÉRPRETE PASCAL" },
     projScoring: { title: "SISTEMA DE SCORING" },
     projKws: { title: "WEB KWS" },
@@ -42,7 +57,22 @@ const translations = {
     sectionProjectsTitle: "PROJECTS",
     sectionProjectsCount: "[01] 05 ENTRIES",
     btnDetails: "[ DETAILS + ]",
-    projWayfinder: { title: "WAYFINDER" },
+    projWayfinder: {
+      title: "WAYFINDER",
+      extDescTitle: "> EXTENDED DESCRIPTION",
+      extDescText: "Comprehensive tourism and interaction platform. The system allows authenticated users to explore geolocated destinations, interact through ratings and reviews, and manage personalized alerts for saved events.",
+      techTitle: "> TECHNICAL ASPECTS",
+      techBullets: [
+        "Implementation of an authentication, authorization, and user session management system.",
+        "Development of social interaction modules (comments CRUD and rating system).",
+        "Notification architecture and favorite events tracking.",
+        ".NET backend with a relational SQL Server database.",
+        "SPA frontend developed in Angular with external API integration (GeoDB)."
+      ],
+      stackTitle: "> TECH STACK",
+      previewTitle: "> PROJECT PREVIEW",
+      repoBtn: "REPOSITORY"
+    },
     projPascal: { title: "PASCAL INTERPRETER" },
     projScoring: { title: "SCORING SYSTEM" },
     projKws: { title: "KWS WEBSITE" },
@@ -317,19 +347,19 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
                       <div className={`flex flex-col gap-6 ${hasImages ? "flex-1" : ""}`}>
                         <div>
                           <p className="mb-2 font-mono text-xs uppercase tracking-widest text-red-600">
-                            &gt; Descripción extendida
+                            {translations[lang].projWayfinder.extDescTitle}
                           </p>
                           <p className="text-sm md:text-base leading-relaxed text-neutral-200">
-                            {project.extendedDescription}
+                            {i === 0 ? translations[lang].projWayfinder.extDescText : project.extendedDescription}
                           </p>
                         </div>
 
                         <div>
                           <p className="mb-3 font-mono text-xs uppercase tracking-widest text-red-600">
-                            &gt; Aspectos técnicos
+                            {translations[lang].projWayfinder.techTitle}
                           </p>
                           <ul className="space-y-2.5 text-sm leading-relaxed" aria-label="Aspectos Técnicos">
-                            {project.technicalHighlights.map((item, idx) => (
+                            {(i === 0 ? translations[lang].projWayfinder.techBullets : project.technicalHighlights).map((item, idx) => (
                               <li key={idx} className="flex items-start gap-3">
                                 <span
                                   className="font-mono text-red-600 font-bold select-none text-base leading-none mt-1"
@@ -356,7 +386,7 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
 
                         <div>
                           <p className="mb-3 font-mono text-xs uppercase tracking-widest text-red-600">
-                            &gt; Stack tecnológico
+                            {translations[lang].projWayfinder.stackTitle}
                           </p>
                           <ul className="flex flex-wrap gap-2" aria-label="Tecnologías">
                             {project.tags.map((tag) => (
@@ -379,7 +409,7 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
                               id={`project-${slug}-repo`}
                               className="inline-flex items-center justify-center gap-2.5 border-2 border-white bg-red-600 px-6 py-3.5 text-xs md:text-sm font-bold uppercase tracking-widest text-white shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all duration-100 hover:translate-x-1 hover:translate-y-1 hover:shadow-none hover:bg-white hover:text-black hover:border-black active:translate-x-1.5 active:translate-y-1.5"
                             >
-                              <GithubIcon size={18} /> Repositorio <ArrowUpRight size={16} strokeWidth={3} />
+                              <GithubIcon size={18} /> {translations[lang].projWayfinder.repoBtn} <ArrowUpRight size={16} strokeWidth={3} />
                             </a>
                           )}
                           {project.demoUrl && (
@@ -401,7 +431,7 @@ function Projects({ lang }: { lang: 'es' | 'en' }) {
                         <div className="flex flex-col items-start lg:items-end justify-start shrink-0">
                           <div className="w-full sm:w-auto">
                             <p className="mb-2 font-mono text-xs uppercase tracking-widest text-red-600">
-                              &gt; Vista previa del proyecto
+                              {translations[lang].projWayfinder.previewTitle}
                             </p>
                             {project.images && project.images.length > 0 ? (
                               <div className="flex flex-col sm:flex-row flex-wrap gap-4 items-center">

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo_Black, JetBrains_Mono } from "next/font/google";
+import BootSequence from "@/components/BootSequence";
 import "./globals.css";
 
 /** Display: sans-serif ultra gruesa y geométrica para títulos gigantes. */
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col bg-black font-mono text-white">
         {children}
+        <BootSequence />
       </body>
     </html>
   );

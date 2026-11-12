@@ -19,12 +19,12 @@ export default function BootSequence() {
     const lineTimers = BOOT_LINES.map((line, index) =>
       setTimeout(() => {
         setLines((prev) => [...prev, line]);
-      }, (index + 1) * 200)
+      }, index * 400)
     );
 
     const hideTimer = setTimeout(() => {
       setIsVisible(false);
-    }, 1200);
+    }, 2200);
 
     return () => {
       lineTimers.forEach(clearTimeout);
@@ -68,3 +68,4 @@ export default function BootSequence() {
     </div>
   );
 }
+
